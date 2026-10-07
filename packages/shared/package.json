@@ -119,6 +119,10 @@
     "./mirai-stance/reason-format": {
       "types": "./src/mirai-stance/reason-format.ts",
       "default": "./src/mirai-stance/reason-format.ts"
+    },
+    "./db/fetch-all-pages": {
+      "types": "./src/db/fetch-all-pages.ts",
+      "default": "./src/db/fetch-all-pages.ts"
     }
   },
   "dependencies": {
