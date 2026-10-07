@@ -1,5 +1,6 @@
 import "server-only";
 
+import { fetchAllPages } from "@mirai-gikai/shared/db/fetch-all-pages";
 import { createAdminClient } from "@mirai-gikai/supabase";
 import type {
   InterviewMessage,
@@ -9,22 +10,6 @@ import type {
 import type { InterviewSessionForTsv } from "../../shared/utils/build-interview-tsv";
 import { normalizeInterviewReport } from "../../shared/utils/normalize-interview-report";
 
-const PAGE_SIZE = 1000;
-
-async function fetchAllPaginated<T>(
-  fetchPage: (from: number, to: number) => Promise<T[]>
-): Promise<T[]> {
-  const all: T[] = [];
-  let offset = 0;
-  while (true) {
-    const page = await fetchPage(offset, offset + PAGE_SIZE - 1);
-    all.push(...page);
-    if (page.length < PAGE_SIZE) break;
-    offset += PAGE_SIZE;
-  }
-  return all;
-}
-
 type SessionWithReport = InterviewSession & {
   interview_report: InterviewReport | InterviewReport[] | null;
 };
@@ -33,12 +18,13 @@ async function fetchAllSessions(
   configId: string
 ): Promise<SessionWithReport[]> {
   const supabase = createAdminClient();
-  return fetchAllPaginated(async (from, to) => {
+  return fetchAllPages(async (from, to) => {
     const { data, error } = await supabase
       .from("interview_sessions")
       .select("*, interview_report(*)")
       .eq("interview_config_id", configId)
       .order("started_at", { ascending: true })
+      .order("id", { ascending: true })
       .range(from, to);
     if (error) {
       throw new Error(
@@ -54,13 +40,14 @@ async function fetchAllMessages(
 ): Promise<InterviewMessage[]> {
   if (sessionIds.length === 0) return [];
   const supabase = createAdminClient();
-  return fetchAllPaginated(async (from, to) => {
+  return fetchAllPages(async (from, to) => {
     const { data, error } = await supabase
       .from("interview_messages")
       .select("*")
       .in("interview_session_id", sessionIds)
       .order("interview_session_id", { ascending: true })
       .order("created_at", { ascending: true })
+      .order("id", { ascending: true })
       .range(from, to);
     if (error) {
       throw new Error(
