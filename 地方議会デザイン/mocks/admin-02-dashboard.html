@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>A2. 議会ダッシュボード</title>
+    <title>ダッシュボード画面</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="mock-bar">
       <a href="index.html">← モック目次</a>
-      <span>A2. 議会ダッシュボード ／ URL: admin /assemblies/aoba-city</span>
+      <span>ダッシュボード画面 ／ URL: admin /assemblies/aoba-city</span>
     </div>
     <div class="admin">
       <nav class="admin-side">
@@ -19,7 +19,7 @@
         <a class="active" href="admin-02-dashboard.html">ダッシュボード</a>
         <a href="admin-03-upload.html">議案を登録</a>
         <a href="admin-04-review.html">下書きの確認 <span class="chip orange">4</span></a>
-        <a href="admin-05-submissions.html">投稿の受付 <span class="chip red">2</span></a>
+        <a href="admin-05-sources.html">URL登録</a>
         <a href="#">会期（定例会）</a>
         <a href="#">インタビュー結果</a>
         <a href="admin-06-members.html">担当者</a>
@@ -31,6 +31,26 @@
             <a class="btn ghost sm" href="web-02-assembly.html">公開ページを見る</a>
             <a class="btn primary sm" href="admin-03-upload.html">＋ 議案書をアップロード</a>
           </div>
+        </div>
+
+        <div class="panel" id="dash-notice">
+          <h2 style="font-size: 16px">📥 登録したURLから自動で見つけたもの</h2>
+          <table>
+            <tr>
+              <td>10/9</td>
+              <td>議事録</td>
+              <td>9月10日 文教委員会</td>
+              <td>審議の進み具合の更新候補 <strong>3件</strong>（第52号ほか）</td>
+              <td><a class="btn primary sm" href="#">確認する</a></td>
+            </tr>
+            <tr>
+              <td>9/26</td>
+              <td>議案書</td>
+              <td>令和8年9月定例会_追加議案.pdf</td>
+              <td>議案2件に分割済み。解説の要否の選択待ち</td>
+              <td><a class="btn outline sm" href="admin-03-upload.html">解説の要否を選ぶ</a></td>
+            </tr>
+          </table>
         </div>
 
         <div class="kpi">
@@ -106,6 +126,7 @@
         </div>
 
         <div class="note">
+          登録したURL（議案書・議事録の一覧ページ）から自動で見つけたものは、上の通知欄に並ぶ。
           担当者は自分の議会しか見えない（議会単位の権限）。地方の採決は会期末にまとめて行われるので、
           採決結果は1件ずつではなく一括入力できるようにする。
           「チームみらいの賛否」は議員がいる議会だけ列を出す。

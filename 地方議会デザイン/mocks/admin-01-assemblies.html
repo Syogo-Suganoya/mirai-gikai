@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>A1. 議会一覧</title>
+    <title>議会一覧画面</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="mock-bar">
       <a href="index.html">← モック目次</a>
-      <span>A1. 議会一覧（全体管理者） ／ URL: admin /assemblies</span>
+      <span>議会一覧画面（全体管理者） ／ URL: admin /assemblies</span>
     </div>
     <div class="admin">
       <nav class="admin-side">
@@ -17,7 +17,6 @@
         <div class="ctx">ログイン中<strong>全体管理者</strong></div>
         <div class="group">全体</div>
         <a class="active" href="admin-01-assemblies.html">議会一覧</a>
-        <a href="admin-05-submissions.html">投稿の受付 <span class="chip red">7</span></a>
         <a href="admin-06-members.html">担当者と権限</a>
         <div class="group">国会</div>
         <a href="#">議案（既存の画面）</a>
@@ -32,7 +31,7 @@
           <div>公開中の議会<strong>19</strong></div>
           <div>準備中の議会<strong>6</strong></div>
           <div>確認待ちの下書き<strong>34</strong></div>
-          <div>担当者のいない投稿<strong>7</strong></div>
+          <div>URLの読み込み失敗<strong>2</strong></div>
         </div>
 
         <div class="panel">
@@ -53,6 +52,7 @@
               <th>今の会期</th>
               <th>議案（公開／下書き）</th>
               <th>担当者</th>
+              <th>URL登録</th>
               <th>待っている人</th>
             </tr>
             <tr>
@@ -62,6 +62,7 @@
               <td>9月定例会（〜9/26）</td>
               <td>14 ／ 4</td>
               <td>3人</td>
+              <td><span class="chip green">議案書・議事録</span></td>
               <td>-</td>
             </tr>
             <tr>
@@ -71,6 +72,7 @@
               <td>9月定例会（〜10/14）</td>
               <td>30 ／ 12</td>
               <td>2人</td>
+              <td><span class="chip red">読み込み失敗</span></td>
               <td>-</td>
             </tr>
             <tr>
@@ -80,6 +82,7 @@
               <td>-</td>
               <td>0 ／ 6</td>
               <td>1人</td>
+              <td><span class="chip orange">議案書のみ</span></td>
               <td>41</td>
             </tr>
             <tr>
@@ -89,6 +92,7 @@
               <td>-</td>
               <td>0 ／ 0</td>
               <td><span style="color: var(--danger)">未設定</span></td>
+              <td>未登録</td>
               <td>23</td>
             </tr>
           </table>

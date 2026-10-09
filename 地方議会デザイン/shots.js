@@ -31,21 +31,6 @@ const SHOTS = [
   { name: "w1-select", file: "web-01-select.html", size: PHONE },
   { name: "w2-assembly", file: "web-02-assembly.html", size: PHONE },
   { name: "w3-bill", file: "web-03-bill.html", size: PHONE },
-  {
-    name: "w3-ask",
-    file: "web-03-bill.html",
-    size: PHONE,
-    clip: ["#ask", "#ask-card"],
-  },
-  { name: "w3-cta", file: "web-03-bill.html", size: PHONE, clip: ["#cta"] },
-  { name: "w4-submit", file: "web-04-submit.html", size: PHONE },
-  {
-    name: "w4-upload",
-    file: "web-04-submit.html",
-    size: PHONE,
-    clip: ["#upload-label", "#upload-url"],
-  },
-  { name: "w4-send", file: "web-04-submit.html", size: PHONE, clip: ["#send"] },
   { name: "w5-not-yet", file: "web-05-not-yet.html", size: PHONE },
   {
     name: "w5-notify",
@@ -59,6 +44,12 @@ const SHOTS = [
     file: "admin-02-dashboard.html",
     size: DESKTOP,
     clip: ["#dash-head"],
+  },
+  {
+    name: "a2-notice",
+    file: "admin-02-dashboard.html",
+    size: DESKTOP,
+    clip: ["#dash-notice"],
   },
   {
     name: "a2-bills",
@@ -81,7 +72,7 @@ const SHOTS = [
     name: "a3-files",
     file: "admin-03-upload.html",
     size: DESKTOP,
-    clip: ["#import-files"],
+    clip: ["#import-files h2", "#import-files-end"],
   },
   {
     name: "a3-split",
@@ -100,12 +91,23 @@ const SHOTS = [
     size: { ...DESKTOP, height: 960 },
     clip: ["#review-actions"],
   },
-  { name: "a5-submissions", file: "admin-05-submissions.html", size: DESKTOP },
   {
-    name: "a5-import",
-    file: "admin-05-submissions.html",
+    name: "a5-urls",
+    file: "admin-05-sources.html",
     size: DESKTOP,
-    clip: ["#sub-head", "#sub-first"],
+    clip: ["#source-urls"],
+  },
+  {
+    name: "a5-test",
+    file: "admin-05-sources.html",
+    size: DESKTOP,
+    clip: ["#source-test"],
+  },
+  {
+    name: "a5-history",
+    file: "admin-05-sources.html",
+    size: DESKTOP,
+    clip: ["#source-history"],
   },
   {
     name: "a6-members",
@@ -137,10 +139,6 @@ async function main() {
     });
     let clip;
     if (s.clip) {
-      // 画面下に貼りつく帯は、範囲外まで撮ると位置がずれて本文に重なる。切り抜くときは貼りつきを外す。
-      await page.addStyleTag({
-        content: ".sticky-cta { position: static !important; }",
-      });
       clip = await page.evaluate(
         (sels, pad) => {
           const rects = sels.map((sel) =>

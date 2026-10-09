@@ -717,7 +717,7 @@ th {
 .node .thumb {
   display: block;
   width: 100%;
-  margin-top: 10px;
+  margin-top: 14px;
   border: 1px solid var(--border);
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
@@ -725,7 +725,8 @@ th {
 }
 
 .node .thumb-phone {
-  width: 180px;
+  width: 340px;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -780,17 +781,17 @@ th {
 
 .node {
   width: 100%;
-  max-width: 520px;
   background: var(--card);
   border: 2px solid var(--border);
-  border-radius: 10px;
-  padding: 10px 14px;
-  font-size: 14px;
+  border-radius: 14px;
+  padding: 16px 20px;
+  font-size: 17px;
+  font-weight: 500;
 }
 
 .who {
   display: inline-block;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   border-radius: 4px;
   padding: 1px 6px;
@@ -799,12 +800,15 @@ th {
 
 .node .screen {
   float: right;
-  font-size: 12px;
+  font-size: 13px;
+  font-weight: 400;
+  margin-left: 12px;
 }
 
 .node p {
-  margin: 4px 0 0;
-  font-size: 12px;
+  margin: 6px 0 0;
+  font-size: 14px;
+  font-weight: 400;
   color: var(--muted);
 }
 
@@ -813,7 +817,7 @@ th {
   border-radius: 999px;
   text-align: center;
   font-weight: 700;
-  max-width: 360px;
+  max-width: 520px;
 }
 
 .node.start {
@@ -838,7 +842,7 @@ th {
   background: var(--warn-soft);
   text-align: center;
   font-weight: 700;
-  max-width: 400px;
+  max-width: 600px;
 }
 
 .node.decision::before {
@@ -848,7 +852,7 @@ th {
 
 .arrow {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
   text-align: center;
   line-height: 1.2;
   padding: 2px 0;
@@ -867,9 +871,8 @@ th {
 .branches {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 16px;
   width: 100%;
-  max-width: 640px;
 }
 
 .branches > .flow {
