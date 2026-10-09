@@ -33,10 +33,10 @@
         </div>
 
         <div class="split">
-          <div class="panel">
+          <div class="panel" id="import-files">
             <h2 style="font-size: 16px">1. 議案書を読み込む</h2>
-            <label class="req">会期</label>
-            <select>
+            <label class="req" id="session-label">会期</label>
+            <select id="session-select">
               <option>令和8年9月定例会（9/2〜9/26）</option>
               <option>＋ 新しい会期を作る</option>
             </select>
@@ -54,7 +54,7 @@
             </p>
           </div>
 
-          <div class="panel">
+          <div class="panel" id="import-split">
             <div class="row between">
               <h2 style="font-size: 16px">2. 議案に分ける</h2>
               <span class="chip blue">AIが18件を検出</span>

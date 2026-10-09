@@ -32,13 +32,14 @@
         <input type="text" value="かわせ町議会（○○県）" />
         <p class="help">候補にない議会も入力できます。運営が議会を追加します。</p>
 
-        <label class="req">議案書（PDF・写真）またはURL</label>
+        <label class="req" id="upload-label">議案書（PDF・写真）またはURL</label>
         <div class="dropzone">
           📄 PDFや写真をここにドロップ<br />
           <small>議会のサイトに載っている「議案書」「提出議案一覧」など</small>
         </div>
         <p class="help" style="text-align: center">または</p>
         <input
+          id="upload-url"
           type="url"
           placeholder="https://www.town.example.lg.jp/gikai/r8-12-gian.pdf"
         />
@@ -63,7 +64,7 @@
         </div>
 
         <p style="margin-top: 16px">
-          <a class="btn primary block" href="#">確認へ進む</a>
+          <a class="btn primary block" id="send" href="#">確認へ進む</a>
         </p>
         <p class="help" style="text-align: center">
           投稿内容は運営が確認してから公開します。公開まで数日かかることがあります。

@@ -17,7 +17,6 @@
         <strong>目次</strong>
         <ol>
           <li><a href="#overview">全体の流れ</a></li>
-          <li><a href="#roles">登場する人と役割</a></li>
           <li><a href="#read">議案を見る・意見を伝える（住民）</a></li>
           <li><a href="#submit">議案書を投稿する（住民）</a></li>
           <li><a href="#register">議案を登録して公開する（担当者）</a></li>
@@ -47,13 +46,6 @@
         議案書が登録されてから、住民の声が議員に届くまでの大きな流れです。
         担当者が要約を一から書く必要はありません。AIが下書きを作り、人はそれを確認します。
       </p>
-      <div class="legend">
-        <span class="who who-user">住民</span>
-        <span class="who who-editor">編集者</span>
-        <span class="who who-reviewer">確認者</span>
-        <span class="who who-admin">運営</span>
-        <span class="who who-ai">AI（点線の枠）</span>
-      </div>
       <div class="flow">
         <div class="node start">議会が議案書を公開（開会の約1週間前）</div>
         <div class="arrow"></div>
@@ -62,6 +54,7 @@
             <div class="node">
               <span class="who who-editor">編集者</span>議案書PDFをアップロード
               <a class="screen" href="admin-03-upload.html">A3</a>
+              <a href="admin-03-upload.html"><img class="thumb" src="shots/a3-upload.png" alt="議案書PDFをアップロードの画面" loading="lazy" /></a>
             </div>
           </div>
           <div class="flow">
@@ -69,6 +62,7 @@
               <span class="who who-user">住民</span>議案書を投稿
               <a class="screen" href="web-04-submit.html">W4</a>
               <p>→ 担当者が受付キューから取り込む</p>
+              <a href="web-04-submit.html"><img class="thumb" src="shots/w4-upload.png" alt="議案書を投稿の画面" loading="lazy" /></a>
             </div>
           </div>
         </div>
@@ -80,11 +74,13 @@
         <div class="node">
           <span class="who who-reviewer">確認者</span>原文と照らして確認し、公開
           <a class="screen" href="admin-04-review.html">A4</a>
+          <a href="admin-04-review.html"><img class="thumb" src="shots/a4-review.png" alt="原文と照らして確認し、公開の画面" loading="lazy" /></a>
         </div>
         <div class="arrow"></div>
         <div class="node">
           <span class="who who-user">住民</span>解説を読む・AIに質問する・意見を伝える
           <a class="screen" href="web-03-bill.html">W3</a>
+          <a href="web-03-bill.html"><img class="thumb thumb-phone" src="shots/w3-bill.png" alt="解説を読む・AIに質問する・意見を伝えるの画面" loading="lazy" /></a>
         </div>
         <div class="arrow"></div>
         <div class="node ai">
@@ -94,46 +90,8 @@
         <div class="node end">議員に届く（委員会・本会議での質問や判断の材料に）</div>
       </div>
 
-      <!-- ========== 2. 役割 ========== -->
-      <h2 id="roles">2. 登場する人と役割</h2>
-      <table>
-        <tr>
-          <th>役割</th>
-          <th>できること</th>
-          <th>ログイン</th>
-          <th>主な画面</th>
-        </tr>
-        <tr>
-          <td><span class="who who-user">住民</span></td>
-          <td>議案を読む、AIに質問する、意見を伝える、議案書を投稿する</td>
-          <td>不要</td>
-          <td>W1〜W5</td>
-        </tr>
-        <tr>
-          <td><span class="who who-editor">編集者</span></td>
-          <td>担当議会の議案を登録・編集する（公開はできない）</td>
-          <td>必要（招待制）</td>
-          <td>A2〜A4</td>
-        </tr>
-        <tr>
-          <td><span class="who who-reviewer">確認者</span></td>
-          <td>編集者の作業に加えて、<strong>公開</strong>、投稿の取り込み、チームみらいの賛否の入力</td>
-          <td>必要（招待制）</td>
-          <td>A2〜A5</td>
-        </tr>
-        <tr>
-          <td><span class="who who-admin">運営</span></td>
-          <td>すべての議会の操作、議会の追加、担当者の招待</td>
-          <td>必要</td>
-          <td>A1〜A6</td>
-        </tr>
-      </table>
-      <p class="help">
-        確認者は、チームみらいの地方議員や地域のリーダーを想定しています。編集者はサポーターやボランティアです。
-      </p>
-
-      <!-- ========== 3. 見る ========== -->
-      <h2 id="read">3. 議案を見る・意見を伝える（住民）</h2>
+      <!-- ========== 2. 見る ========== -->
+      <h2 id="read">2. 議案を見る・意見を伝える（住民）</h2>
       <div class="flow">
         <div class="node start">みらい議会（地方議会版）を開く</div>
         <div class="arrow"></div>
@@ -141,6 +99,7 @@
           <span class="who who-user">住民</span>自分のまちの議会を選ぶ
           <a class="screen" href="web-01-select.html">W1</a>
           <p>開会中の議会から選ぶ／都道府県から探す／市区町村名で検索</p>
+          <a href="web-01-select.html"><img class="thumb thumb-phone" src="shots/w1-select.png" alt="自分のまちの議会を選ぶの画面" loading="lazy" /></a>
         </div>
         <div class="arrow"></div>
         <div class="node decision">その議会の議案は公開されている？</div>
@@ -151,21 +110,25 @@
               <strong>はい</strong> → 議会トップで議案一覧を見る
               <a class="screen" href="web-02-assembly.html">W2</a>
               <p>予算・条例などの種類で絞り込める</p>
+              <a href="web-02-assembly.html"><img class="thumb thumb-phone" src="shots/w2-assembly.png" alt="議会トップで議案一覧を見るの画面" loading="lazy" /></a>
             </div>
             <div class="arrow"></div>
             <div class="node">
               気になる議案を開く
               <a class="screen" href="web-03-bill.html">W3</a>
               <p>「ふつう／くわしく」で解説の詳しさを切り替える</p>
+              <a href="web-03-bill.html"><img class="thumb thumb-phone" src="shots/w3-bill.png" alt="気になる議案を開くの画面" loading="lazy" /></a>
             </div>
             <div class="arrow"></div>
             <div class="node">
               わからない点はAIに質問する
               <p>AIは議案書と資料をもとに答える</p>
+              <a href="web-03-bill.html"><img class="thumb" src="shots/w3-ask.png" alt="わからない点はAIに質問するの画面" loading="lazy" /></a>
             </div>
             <div class="arrow"></div>
             <div class="node">
               「意見を伝える」からAIインタビューに答える（約5分）
+              <a href="web-03-bill.html"><img class="thumb" src="shots/w3-cta.png" alt="意見を伝える」からAIインタビューに答えるの画面" loading="lazy" /></a>
             </div>
             <div class="arrow"></div>
             <div class="node end">意見が議員に届く</div>
@@ -174,11 +137,13 @@
             <div class="node">
               <strong>いいえ</strong> → 「まだ載っていません」ページ
               <a class="screen" href="web-05-not-yet.html">W5</a>
+              <a href="web-05-not-yet.html"><img class="thumb thumb-phone" src="shots/w5-not-yet.png" alt="まだ載っていません」ページの画面" loading="lazy" /></a>
             </div>
             <div class="arrow"></div>
             <div class="node">
               「公開されたら知らせて」に登録する
-              <p>または議案書を送る（→ 4章）</p>
+              <p>または議案書を送る（→ 3章）</p>
+              <a href="web-05-not-yet.html"><img class="thumb" src="shots/w5-notify.png" alt="公開されたら知らせて」に登録するの画面" loading="lazy" /></a>
             </div>
             <div class="arrow"></div>
             <div class="node end">公開されたらメールで届く</div>
@@ -186,31 +151,8 @@
         </div>
       </div>
 
-      <div class="shots">
-        <figure class="shot">
-          <a href="web-01-select.html"><img src="shots/w1-select.png" alt="W1 議会を選ぶ：開会中の議会から選ぶか、都道府県から探す" loading="lazy" /></a>
-          <figcaption><strong>W1 議会を選ぶ</strong>：開会中の議会から選ぶか、都道府県から探す</figcaption>
-        </figure>
-        <figure class="shot">
-          <a href="web-02-assembly.html"><img src="shots/w2-assembly.png" alt="W2 議会トップ：定例会の議案一覧。種類のタブで絞り込む" loading="lazy" /></a>
-          <figcaption><strong>W2 議会トップ</strong>：定例会の議案一覧。種類のタブで絞り込む</figcaption>
-        </figure>
-        <figure class="shot">
-          <a href="web-03-bill.html"><img src="shots/w3-bill.png" alt="W3 議案詳細：「ふつう／くわしく」で解説を切り替える" loading="lazy" /></a>
-          <figcaption><strong>W3 議案詳細</strong>：「ふつう／くわしく」で解説を切り替える</figcaption>
-        </figure>
-        <figure class="shot">
-          <a href="web-03-bill.html"><img src="shots/w3-bill-actions.png" alt="W3 議案詳細（下部）：AIに質問／意見を伝える" loading="lazy" /></a>
-          <figcaption><strong>W3 議案詳細（下部）</strong>：AIに質問／意見を伝える</figcaption>
-        </figure>
-        <figure class="shot">
-          <a href="web-05-not-yet.html"><img src="shots/w5-not-yet.png" alt="W5 まだ議案がない議会：公開の通知を登録するか、議案書を送る" loading="lazy" /></a>
-          <figcaption><strong>W5 まだ議案がない議会</strong>：公開の通知を登録するか、議案書を送る</figcaption>
-        </figure>
-      </div>
-
-      <!-- ========== 4. 投稿 ========== -->
-      <h2 id="submit">4. 議案書を投稿する（住民）</h2>
+      <!-- ========== 3. 投稿 ========== -->
+      <h2 id="submit">3. 議案書を投稿する（住民）</h2>
       <p>
         自分のまちの議会が載っていない、または議案が足りないときに使います。
         <strong>要約を書く必要はありません。</strong>議案書を渡すだけで、解説はAIと担当者が作ります。
@@ -226,35 +168,32 @@
         <div class="node">
           <span class="who who-user">住民</span>投稿ページを開く
           <a class="screen" href="web-04-submit.html">W4</a>
+          <a href="web-04-submit.html"><img class="thumb thumb-phone" src="shots/w4-submit.png" alt="投稿ページを開くの画面" loading="lazy" /></a>
         </div>
         <div class="arrow"></div>
         <div class="node">
           議会を選び、PDF・写真をアップロード（またはURLを貼る）
           <p>候補にない議会は名前を入力すればOK</p>
+          <a href="web-04-submit.html"><img class="thumb" src="shots/w4-upload.png" alt="議会を選び、PDF・写真をアップロードの画面" loading="lazy" /></a>
         </div>
         <div class="arrow"></div>
         <div class="node">
           気になる議案のひとこと・連絡先メールを入れる（任意）
         </div>
         <div class="arrow"></div>
-        <div class="node">送信</div>
+        <div class="node">送信
+          <a href="web-04-submit.html"><img class="thumb" src="shots/w4-send.png" alt="送信の画面" loading="lazy" /></a>
+        </div>
         <div class="arrow"></div>
         <div class="node ai">
           <span class="who who-ai">AI</span>議案書かどうか・どの会期か・重複がないかを判定
         </div>
-        <div class="arrow">担当者が確認（→ 6章）</div>
+        <div class="arrow">担当者が確認（→ 5章）</div>
         <div class="node end">公開されたらメールで届く（数日かかることがあります）</div>
       </div>
 
-      <div class="shots">
-        <figure class="shot">
-          <a href="web-04-submit.html"><img src="shots/w4-submit.png" alt="W4 投稿：議会を選び、議案書のPDF・写真・URLを送るだけ" loading="lazy" /></a>
-          <figcaption><strong>W4 投稿</strong>：議会を選び、議案書のPDF・写真・URLを送るだけ</figcaption>
-        </figure>
-      </div>
-
-      <!-- ========== 5. 登録 ========== -->
-      <h2 id="register">5. 議案を登録して公開する（担当者）</h2>
+      <!-- ========== 4. 登録 ========== -->
+      <h2 id="register">4. 議案を登録して公開する（担当者）</h2>
       <p>
         担当者のいちばん大事な作業です。1会期分の議案書をまとめてアップロードすれば、議案ごとの登録はAIが行います。
       </p>
@@ -264,15 +203,18 @@
         <div class="node">
           <span class="who who-editor">編集者</span>ダッシュボードから「議案書をアップロード」
           <a class="screen" href="admin-02-dashboard.html">A2</a>
+          <a href="admin-02-dashboard.html"><img class="thumb" src="shots/a2-head.png" alt="ダッシュボードから「議案書をアップロードの画面" loading="lazy" /></a>
         </div>
         <div class="arrow"></div>
         <div class="node">
           会期を選ぶ（なければ新しく作る）
           <a class="screen" href="admin-03-upload.html">A3</a>
+          <a href="admin-03-upload.html"><img class="thumb" src="shots/a3-session.png" alt="会期を選ぶ（なければ新しく作る）の画面" loading="lazy" /></a>
         </div>
         <div class="arrow"></div>
         <div class="node">
           議案書PDF・議会サイトのURL・補足資料（委員会資料など）をアップロード
+          <a href="admin-03-upload.html"><img class="thumb" src="shots/a3-files.png" alt="議案書PDF・議会サイトのURL・補足資料の画面" loading="lazy" /></a>
         </div>
         <div class="arrow"></div>
         <div class="node ai">
@@ -282,6 +224,7 @@
         <div class="node">
           <span class="who who-editor">編集者</span>解説が不要な議案のチェックを外す
           <p>例: 人権擁護委員の推薦、市道の路線認定 など</p>
+          <a href="admin-03-upload.html"><img class="thumb" src="shots/a3-split.png" alt="解説が不要な議案のチェックを外すの画面" loading="lazy" /></a>
         </div>
         <div class="arrow"></div>
         <div class="node ai">
@@ -293,6 +236,7 @@
           <span class="who who-editor">編集者</span>原文と並べて下書きを確認・修正
           <a class="screen" href="admin-04-review.html">A4</a>
           <p>黄色の箇所がAIの根拠。⚠ の警告（原文にない数値など）は必ず確認する</p>
+          <a href="admin-04-review.html"><img class="thumb" src="shots/a4-review.png" alt="原文と並べて下書きを確認・修正の画面" loading="lazy" /></a>
         </div>
         <div class="arrow"></div>
         <div class="node decision">確認者の権限がある？</div>
@@ -301,6 +245,7 @@
           <div class="flow">
             <div class="node">
               <strong>ある</strong> → <span class="who who-reviewer">確認者</span>「確認済みにして公開」
+              <a href="admin-04-review.html"><img class="thumb" src="shots/a4-actions.png" alt="確認済みにして公開の画面" loading="lazy" /></a>
             </div>
             <div class="arrow"></div>
             <div class="node end">議案ページが公開される</div>
@@ -322,20 +267,6 @@
           </div>
         </div>
       </div>
-      <div class="shots">
-        <figure class="shot wide">
-          <a href="admin-02-dashboard.html"><img src="shots/a2-dashboard.png" alt="A2 ダッシュボード：右上の「議案書をアップロード」から始める。確認待ちの件数もここで見る" loading="lazy" /></a>
-          <figcaption><strong>A2 ダッシュボード</strong>：右上の「議案書をアップロード」から始める。確認待ちの件数もここで見る</figcaption>
-        </figure>
-        <figure class="shot wide">
-          <a href="admin-03-upload.html"><img src="shots/a3-upload.png" alt="A3 議案の一括登録：左で会期と議案書を指定、右でAIが分割した議案から解説不要のものを外す" loading="lazy" /></a>
-          <figcaption><strong>A3 議案の一括登録</strong>：左で会期と議案書を指定、右でAIが分割した議案から解説不要のものを外す</figcaption>
-        </figure>
-        <figure class="shot wide">
-          <a href="admin-04-review.html"><img src="shots/a4-review.png" alt="A4 下書きの確認：左が原文（黄色がAIの根拠）、右が下書き。⚠ の警告を確認してから公開" loading="lazy" /></a>
-          <figcaption><strong>A4 下書きの確認</strong>：左が原文（黄色がAIの根拠）、右が下書き。⚠ の警告を確認してから公開</figcaption>
-        </figure>
-      </div>
       <h3>確認のチェックポイント</h3>
       <ul>
         <li>金額・人数・日付・施行日が原文と一致しているか</li>
@@ -344,8 +275,8 @@
         <li>専門用語が「ふつう」の解説に残っていないか</li>
       </ul>
 
-      <!-- ========== 6. 取り込み ========== -->
-      <h2 id="intake">6. 投稿を取り込む（担当者・運営）</h2>
+      <!-- ========== 5. 取り込み ========== -->
+      <h2 id="intake">5. 投稿を取り込む（担当者・運営）</h2>
       <div class="flow">
         <div class="node start">住民から投稿が届く（通知）</div>
         <div class="arrow"></div>
@@ -360,7 +291,7 @@
           <div class="flow">
             <div class="node">
               <strong>いない</strong> → <span class="who who-admin">運営</span>に通知
-              <p>担当者探しも検討（→ 8章）</p>
+              <p>担当者探しも検討（→ 7章）</p>
             </div>
           </div>
         </div>
@@ -368,6 +299,7 @@
         <div class="node">
           受付キューでAIの判定を見る
           <a class="screen" href="admin-05-submissions.html">A5</a>
+          <a href="admin-05-submissions.html"><img class="thumb" src="shots/a5-submissions.png" alt="受付キューでAIの判定を見るの画面" loading="lazy" /></a>
         </div>
         <div class="arrow"></div>
         <div class="node decision">AIの判定は？</div>
@@ -376,7 +308,8 @@
           <div class="flow">
             <div class="node">
               <strong>議案書</strong> → 「取り込む」
-              <p>PDFと会期が入った状態で A3 が開く → 5章の流れへ</p>
+              <p>PDFと会期が入った状態で A3 が開く → 4章の流れへ</p>
+              <a href="admin-05-submissions.html"><img class="thumb" src="shots/a5-import.png" alt="議案書 → 「取り込むの画面" loading="lazy" /></a>
             </div>
           </div>
           <div class="flow">
@@ -388,15 +321,8 @@
         </div>
       </div>
 
-      <div class="shots">
-        <figure class="shot wide">
-          <a href="admin-05-submissions.html"><img src="shots/a5-submissions.png" alt="A5 投稿の受付：AIの判定（議案書／重複の可能性／議案書ではない）を見て、取り込むか却下する" loading="lazy" /></a>
-          <figcaption><strong>A5 投稿の受付</strong>：AIの判定（議案書／重複の可能性／議案書ではない）を見て、取り込むか却下する</figcaption>
-        </figure>
-      </div>
-
-      <!-- ========== 7. 会期末 ========== -->
-      <h2 id="session-end">7. 会期末の作業（担当者）</h2>
+      <!-- ========== 6. 会期末 ========== -->
+      <h2 id="session-end">6. 会期末の作業（担当者）</h2>
       <p>地方議会では、議案の採決は会期の最終日の本会議でまとめて行われることがほとんどです。</p>
       <div class="flow">
         <div class="node start">最終日の本会議で採決</div>
@@ -405,6 +331,7 @@
           <span class="who who-reviewer">確認者</span>ダッシュボードの「採決結果を一括入力」
           <a class="screen" href="admin-02-dashboard.html">A2</a>
           <p>可決／否決／継続審査を議案ごとに選ぶ</p>
+          <a href="admin-02-dashboard.html"><img class="thumb" src="shots/a2-bills.png" alt="ダッシュボードの「採決結果を一括入力の画面" loading="lazy" /></a>
         </div>
         <div class="arrow"></div>
         <div class="node">
@@ -417,18 +344,12 @@
         <div class="arrow"></div>
         <div class="node end">定例会が「過去の定例会」に移る</div>
       </div>
-      <div class="shots">
-        <figure class="shot wide">
-          <a href="admin-02-dashboard.html"><img src="shots/a2-dashboard.png" alt="A2 ダッシュボード：議案一覧の右上「採決結果を一括入力」から、会期末の結果をまとめて入れる" loading="lazy" /></a>
-          <figcaption><strong>A2 ダッシュボード</strong>：議案一覧の右上「採決結果を一括入力」から、会期末の結果をまとめて入れる</figcaption>
-        </figure>
-      </div>
       <p class="help">
         継続審査になった議案は、次の定例会の一覧にも引き継いで表示します。
       </p>
 
-      <!-- ========== 8. 立ち上げ ========== -->
-      <h2 id="launch">8. 新しい議会を立ち上げる（運営）</h2>
+      <!-- ========== 7. 立ち上げ ========== -->
+      <h2 id="launch">7. 新しい議会を立ち上げる（運営）</h2>
       <p>
         全国の議会はあらかじめ「マスタのみ」の状態で登録されています。担当者が見つかった議会から順に立ち上げます。
       </p>
@@ -439,17 +360,19 @@
           <span class="who who-admin">運営</span>議会一覧で候補を見る
           <a class="screen" href="admin-01-assemblies.html">A1</a>
           <p>判断材料: チームみらいの議員がいるか／「待っている人」の数／投稿の数</p>
+          <a href="admin-01-assemblies.html"><img class="thumb" src="shots/a1-assemblies.png" alt="議会一覧で候補を見るの画面" loading="lazy" /></a>
         </div>
         <div class="arrow"></div>
         <div class="node">
           担当者（確認者を最低1人）を招待
           <a class="screen" href="admin-06-members.html">A6</a>
+          <a href="admin-06-members.html"><img class="thumb" src="shots/a6-members.png" alt="担当者（確認者を最低1人）を招待の画面" loading="lazy" /></a>
         </div>
         <div class="arrow"></div>
         <div class="node">議会の状態を「準備中」にする（非公開のまま作業できる）</div>
         <div class="arrow"></div>
         <div class="node">
-          <span class="who who-reviewer">確認者</span>次の定例会の議案を登録（→ 5章）
+          <span class="who who-reviewer">確認者</span>次の定例会の議案を登録（→ 4章）
         </div>
         <div class="arrow"></div>
         <div class="node decision">公開できる議案が1件以上ある？</div>
@@ -463,19 +386,8 @@
         </div>
       </div>
 
-      <div class="shots">
-        <figure class="shot wide">
-          <a href="admin-01-assemblies.html"><img src="shots/a1-assemblies.png" alt="A1 議会一覧：状態・担当者・「待っている人」の数を見て、立ち上げる議会を決める" loading="lazy" /></a>
-          <figcaption><strong>A1 議会一覧</strong>：状態・担当者・「待っている人」の数を見て、立ち上げる議会を決める</figcaption>
-        </figure>
-        <figure class="shot wide">
-          <a href="admin-06-members.html"><img src="shots/a6-members.png" alt="A6 担当者と権限：「担当者を招待」から、議会ごとに確認者・編集者を割り当てる" loading="lazy" /></a>
-          <figcaption><strong>A6 担当者と権限</strong>：「担当者を招待」から、議会ごとに確認者・編集者を割り当てる</figcaption>
-        </figure>
-      </div>
-
-      <!-- ========== 9. 状態 ========== -->
-      <h2 id="states">9. 状態の移り変わり</h2>
+      <!-- ========== 8. 状態 ========== -->
+      <h2 id="states">8. 状態の移り変わり</h2>
       <h3>議会</h3>
       <div class="states">
         <span class="st">マスタのみ</span><span class="to">→</span>
@@ -503,8 +415,8 @@
         <span class="st">却下</span>
       </div>
 
-      <!-- ========== 10. FAQ ========== -->
-      <h2 id="faq">10. よくある質問</h2>
+      <!-- ========== 9. FAQ ========== -->
+      <h2 id="faq">9. よくある質問</h2>
       <h3>Q. AIの下書きはそのまま公開されますか？</h3>
       <p>
         されません。公開できるのは確認者だけで、公開ページには「AIが下書きし、担当者が確認した」ことと確認日を表示します。
@@ -526,6 +438,34 @@
         担当者は公開後も編集できます。修正すると、公開ページの確認日が更新されます。
       </p>
       </main>
+
+      <aside class="roles">
+        <strong>登場する人と役割</strong>
+        <div class="role">
+          <span class="who who-user">住民</span>
+          <p>議案を読む、AIに質問する、意見を伝える、議案書を投稿する</p>
+          <p class="help">ログイン不要 ・ W1〜W5</p>
+        </div>
+        <div class="role">
+          <span class="who who-editor">編集者</span>
+          <p>担当議会の議案を登録・編集する（公開はできない）</p>
+          <p class="help">招待制 ・ A2〜A4 ・ サポーター、ボランティア</p>
+        </div>
+        <div class="role">
+          <span class="who who-reviewer">確認者</span>
+          <p>編集者の作業に加えて、<strong>公開</strong>、投稿の取り込み、チームみらいの賛否の入力</p>
+          <p class="help">招待制 ・ A2〜A5 ・ 地方議員、地域のリーダー</p>
+        </div>
+        <div class="role">
+          <span class="who who-admin">運営</span>
+          <p>すべての議会の操作、議会の追加、担当者の招待</p>
+          <p class="help">A1〜A6</p>
+        </div>
+        <div class="role">
+          <span class="who who-ai">AI</span>
+          <p>議案書の分割、解説の下書き、投稿の判定、意見のまとめ。フローチャートでは点線の枠</p>
+        </div>
+      </aside>
     </div>
   </body>
 </html>
