@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>地方版みらい議会 画面モック</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="index-wrap">
+      <h1>地方版みらい議会 画面モック</h1>
+      <p>
+        設計メモ
+        <code>docs/20261009_2036_地方版みらい議会設計.md</code>
+        の画面イメージ。静的HTMLで、ボタンやリンクは画面遷移のイメージのみ。
+        議会名・議案はすべて架空です。
+      </p>
+
+      <h2 class="section-title">公開サイト（web）</h2>
+      <div class="index-grid">
+        <a class="card" href="web-01-select.html">
+          <h3>W1. 地方議会の選択</h3>
+          <p>都道府県 → 議会を選ぶ。議案が公開済みの議会だけ選べる</p>
+        </a>
+        <a class="card" href="web-02-assembly.html">
+          <h3>W2. 地方議会トップ</h3>
+          <p>開会中の定例会と議案一覧、過去の定例会</p>
+        </a>
+        <a class="card" href="web-03-bill.html">
+          <h3>W3. 議案詳細</h3>
+          <p>概要（ふつう／くわしく）、審議の進み具合、AIチャット、インタビュー</p>
+        </a>
+        <a class="card" href="web-04-submit.html">
+          <h3>W4. 議案の投稿（一般向け）</h3>
+          <p>議案書PDFかURLを送るだけ。概要はAIと運営が作る</p>
+        </a>
+        <a class="card" href="web-05-not-yet.html">
+          <h3>W5. まだ始まっていない議会</h3>
+          <p>空のページは出さず、協力を呼びかける</p>
+        </a>
+      </div>
+
+      <h2 class="section-title">管理画面（admin）</h2>
+      <div class="index-grid">
+        <a class="card" href="admin-01-assemblies.html">
+          <h3>A1. 議会一覧（全体管理者）</h3>
+          <p>議会の追加・公開設定・担当者の状況</p>
+        </a>
+        <a class="card" href="admin-02-dashboard.html">
+          <h3>A2. 議会ダッシュボード</h3>
+          <p>担当議会の定例会と議案、確認待ちの件数</p>
+        </a>
+        <a class="card" href="admin-03-upload.html">
+          <h3>A3. 議案の一括登録</h3>
+          <p>議案書PDFをアップロード → AIが議案ごとに分割・下書き</p>
+        </a>
+        <a class="card" href="admin-04-review.html">
+          <h3>A4. AI下書きの確認</h3>
+          <p>原文PDFと下書きを並べて確認・修正 → 公開</p>
+        </a>
+        <a class="card" href="admin-05-submissions.html">
+          <h3>A5. 投稿の受付キュー</h3>
+          <p>一般から届いた議案書を取り込む／却下する</p>
+        </a>
+        <a class="card" href="admin-06-members.html">
+          <h3>A6. 担当者と権限</h3>
+          <p>議会ごとの編集者・確認者を招待する</p>
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
