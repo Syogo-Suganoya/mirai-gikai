@@ -12,17 +12,7 @@
       <span>使い方ガイド（構想段階・画面はモック）</span>
     </div>
 
-    <div class="guide">
-      <h1>地方版みらい議会 使い方ガイド</h1>
-      <p>
-        地方版みらい議会は、都道府県議会・市区町村議会の議案をわかりやすく解説し、住民の声を議会に届けるサービスです。
-        自治体ごとに別のサイトを作るのではなく、<strong>議案書を登録すれば、その議会のページが自動でできあがります</strong>。
-        このガイドでは、見る人・投稿する人・運営する人それぞれの使い方を説明します。
-      </p>
-      <div class="note">
-        構想段階のガイドです。リンク先の画面は静的モックで、実際の動作はしません。
-      </div>
-
+    <div class="guide-layout">
       <nav class="toc">
         <strong>目次</strong>
         <ol>
@@ -38,6 +28,18 @@
           <li><a href="#faq">よくある質問</a></li>
         </ol>
       </nav>
+
+      <main class="guide">
+      <h1>地方版みらい議会 使い方ガイド</h1>
+      <p>
+        地方版みらい議会は、都道府県議会・市区町村議会の議案をわかりやすく解説し、住民の声を議会に届けるサービスです。
+        自治体ごとに別のサイトを作るのではなく、<strong>議案書を登録すれば、その議会のページが自動でできあがります</strong>。
+        このガイドでは、見る人・投稿する人・運営する人それぞれの使い方を説明します。
+      </p>
+      <div class="note">
+        構想段階のガイドです。リンク先の画面は静的モックで、実際の動作はしません。
+      </div>
+
 
       <!-- ========== 1. 全体の流れ ========== -->
       <h2 id="overview">1. 全体の流れ</h2>
@@ -184,6 +186,29 @@
         </div>
       </div>
 
+      <div class="shots">
+        <figure class="shot">
+          <a href="web-01-select.html"><img src="shots/w1-select.png" alt="W1 議会を選ぶ：開会中の議会から選ぶか、都道府県から探す" loading="lazy" /></a>
+          <figcaption><strong>W1 議会を選ぶ</strong>：開会中の議会から選ぶか、都道府県から探す</figcaption>
+        </figure>
+        <figure class="shot">
+          <a href="web-02-assembly.html"><img src="shots/w2-assembly.png" alt="W2 議会トップ：定例会の議案一覧。種類のタブで絞り込む" loading="lazy" /></a>
+          <figcaption><strong>W2 議会トップ</strong>：定例会の議案一覧。種類のタブで絞り込む</figcaption>
+        </figure>
+        <figure class="shot">
+          <a href="web-03-bill.html"><img src="shots/w3-bill.png" alt="W3 議案詳細：「ふつう／くわしく」で解説を切り替える" loading="lazy" /></a>
+          <figcaption><strong>W3 議案詳細</strong>：「ふつう／くわしく」で解説を切り替える</figcaption>
+        </figure>
+        <figure class="shot">
+          <a href="web-03-bill.html"><img src="shots/w3-bill-actions.png" alt="W3 議案詳細（下部）：AIに質問／意見を伝える" loading="lazy" /></a>
+          <figcaption><strong>W3 議案詳細（下部）</strong>：AIに質問／意見を伝える</figcaption>
+        </figure>
+        <figure class="shot">
+          <a href="web-05-not-yet.html"><img src="shots/w5-not-yet.png" alt="W5 まだ議案がない議会：公開の通知を登録するか、議案書を送る" loading="lazy" /></a>
+          <figcaption><strong>W5 まだ議案がない議会</strong>：公開の通知を登録するか、議案書を送る</figcaption>
+        </figure>
+      </div>
+
       <!-- ========== 4. 投稿 ========== -->
       <h2 id="submit">4. 議案書を投稿する（住民）</h2>
       <p>
@@ -219,6 +244,13 @@
         </div>
         <div class="arrow">担当者が確認（→ 6章）</div>
         <div class="node end">公開されたらメールで届く（数日かかることがあります）</div>
+      </div>
+
+      <div class="shots">
+        <figure class="shot">
+          <a href="web-04-submit.html"><img src="shots/w4-submit.png" alt="W4 投稿：議会を選び、議案書のPDF・写真・URLを送るだけ" loading="lazy" /></a>
+          <figcaption><strong>W4 投稿</strong>：議会を選び、議案書のPDF・写真・URLを送るだけ</figcaption>
+        </figure>
       </div>
 
       <!-- ========== 5. 登録 ========== -->
@@ -290,6 +322,20 @@
           </div>
         </div>
       </div>
+      <div class="shots">
+        <figure class="shot wide">
+          <a href="admin-02-dashboard.html"><img src="shots/a2-dashboard.png" alt="A2 ダッシュボード：右上の「議案書をアップロード」から始める。確認待ちの件数もここで見る" loading="lazy" /></a>
+          <figcaption><strong>A2 ダッシュボード</strong>：右上の「議案書をアップロード」から始める。確認待ちの件数もここで見る</figcaption>
+        </figure>
+        <figure class="shot wide">
+          <a href="admin-03-upload.html"><img src="shots/a3-upload.png" alt="A3 議案の一括登録：左で会期と議案書を指定、右でAIが分割した議案から解説不要のものを外す" loading="lazy" /></a>
+          <figcaption><strong>A3 議案の一括登録</strong>：左で会期と議案書を指定、右でAIが分割した議案から解説不要のものを外す</figcaption>
+        </figure>
+        <figure class="shot wide">
+          <a href="admin-04-review.html"><img src="shots/a4-review.png" alt="A4 下書きの確認：左が原文（黄色がAIの根拠）、右が下書き。⚠ の警告を確認してから公開" loading="lazy" /></a>
+          <figcaption><strong>A4 下書きの確認</strong>：左が原文（黄色がAIの根拠）、右が下書き。⚠ の警告を確認してから公開</figcaption>
+        </figure>
+      </div>
       <h3>確認のチェックポイント</h3>
       <ul>
         <li>金額・人数・日付・施行日が原文と一致しているか</li>
@@ -342,6 +388,13 @@
         </div>
       </div>
 
+      <div class="shots">
+        <figure class="shot wide">
+          <a href="admin-05-submissions.html"><img src="shots/a5-submissions.png" alt="A5 投稿の受付：AIの判定（議案書／重複の可能性／議案書ではない）を見て、取り込むか却下する" loading="lazy" /></a>
+          <figcaption><strong>A5 投稿の受付</strong>：AIの判定（議案書／重複の可能性／議案書ではない）を見て、取り込むか却下する</figcaption>
+        </figure>
+      </div>
+
       <!-- ========== 7. 会期末 ========== -->
       <h2 id="session-end">7. 会期末の作業（担当者）</h2>
       <p>地方議会では、議案の採決は会期の最終日の本会議でまとめて行われることがほとんどです。</p>
@@ -363,6 +416,12 @@
         </div>
         <div class="arrow"></div>
         <div class="node end">定例会が「過去の定例会」に移る</div>
+      </div>
+      <div class="shots">
+        <figure class="shot wide">
+          <a href="admin-02-dashboard.html"><img src="shots/a2-dashboard.png" alt="A2 ダッシュボード：議案一覧の右上「採決結果を一括入力」から、会期末の結果をまとめて入れる" loading="lazy" /></a>
+          <figcaption><strong>A2 ダッシュボード</strong>：議案一覧の右上「採決結果を一括入力」から、会期末の結果をまとめて入れる</figcaption>
+        </figure>
       </div>
       <p class="help">
         継続審査になった議案は、次の定例会の一覧にも引き継いで表示します。
@@ -402,6 +461,17 @@
         <div class="node end">
           議会ページが公開され、「待っている人」にお知らせが届く
         </div>
+      </div>
+
+      <div class="shots">
+        <figure class="shot wide">
+          <a href="admin-01-assemblies.html"><img src="shots/a1-assemblies.png" alt="A1 議会一覧：状態・担当者・「待っている人」の数を見て、立ち上げる議会を決める" loading="lazy" /></a>
+          <figcaption><strong>A1 議会一覧</strong>：状態・担当者・「待っている人」の数を見て、立ち上げる議会を決める</figcaption>
+        </figure>
+        <figure class="shot wide">
+          <a href="admin-06-members.html"><img src="shots/a6-members.png" alt="A6 担当者と権限：「担当者を招待」から、議会ごとに確認者・編集者を割り当てる" loading="lazy" /></a>
+          <figcaption><strong>A6 担当者と権限</strong>：「担当者を招待」から、議会ごとに確認者・編集者を割り当てる</figcaption>
+        </figure>
       </div>
 
       <!-- ========== 9. 状態 ========== -->
@@ -455,6 +525,7 @@
       <p>
         担当者は公開後も編集できます。修正すると、公開ページの確認日が更新されます。
       </p>
+      </main>
     </div>
   </body>
 </html>

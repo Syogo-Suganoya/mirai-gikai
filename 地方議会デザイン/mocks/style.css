@@ -663,10 +663,70 @@ th {
 }
 
 /* ===== 使い方ガイド ===== */
-.guide {
-  max-width: 880px;
+.guide-layout {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 32px;
+  max-width: 1160px;
   margin: 0 auto;
   padding: 24px 16px 64px;
+}
+
+.guide {
+  min-width: 0;
+}
+
+.guide-layout .toc {
+  position: sticky;
+  top: 16px;
+  align-self: start;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+}
+
+.toc a {
+  display: block;
+  padding: 3px 0;
+  text-decoration: none;
+}
+
+.toc a:hover {
+  text-decoration: underline;
+}
+
+.shots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 16px 0 8px;
+}
+
+.shot {
+  margin: 0;
+  flex: 0 1 240px;
+}
+
+.shot.wide {
+  flex: 1 1 100%;
+}
+
+.shot img {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background: var(--card);
+}
+
+.shot figcaption {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.shot figcaption strong {
+  color: var(--text);
 }
 
 .guide h2 {
@@ -690,7 +750,7 @@ th {
 }
 
 .toc ol {
-  margin: 0;
+  margin: 8px 0 0;
   padding-left: 20px;
 }
 
@@ -863,6 +923,15 @@ th {
 }
 
 @media (max-width: 760px) {
+  .guide-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-layout .toc {
+    position: static;
+    max-height: none;
+  }
+
   .branches {
     grid-template-columns: 1fr;
   }
