@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Montserrat:wght@600;700&display=swap">
+<style>
+:root {
+  --teal: #2aa693;
+  --teal-dark: #0f8472;
+  --teal-light: #30bca7;
+  --mint: #e2f6f3;
+  --ink: #1f2937;
+  --ink-soft: #4b5563;
+  --muted: #85868e;
+  --violet: #6a4fb3;
+  --violet-wash: #efeafb;
+  --amber: #b06f00;
+  --amber-wash: #fcefd6;
+  --blue: #2f6db5;
+  --blue-wash: #e6eef9;
+  --red: #d64545;
+  --white: #ffffff;
+  --line: #cfe9e3;
+  --f: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
+  --f-en: "Montserrat", "Noto Sans JP", sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1600px; height: 900px; overflow: hidden; }
+body { font-family: var(--f); color: var(--ink); background: #fff; }
+.slide {
+  display: none; position: relative; width: 1600px; height: 900px; overflow: hidden;
+  background: linear-gradient(135deg, #f7f4ee 0%, #eef6f0 60%, #e3f5f2 100%);
+  padding: 72px 96px 0 128px;
+}
+.slide.on { display: block; }
+.slide::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 24px; background: var(--teal); }
+.kicker { display: inline-flex; align-items: center; gap: 14px; font-weight: 700; color: var(--teal-dark); font-size: 26px; }
+.kicker .no { font-family: var(--f-en); background: var(--teal); color: #fff; border-radius: 8px; padding: 2px 14px; font-size: 22px; }
+h1 { font-size: 64px; font-weight: 900; line-height: 1.25; margin-top: 14px; }
+h1 em { font-style: normal; color: var(--teal); }
+.sub { font-size: 26px; font-weight: 500; color: var(--ink-soft); margin-top: 16px; line-height: 1.6; }
+footer { position: absolute; left: 128px; right: 96px; bottom: 36px; display: flex; align-items: center; justify-content: space-between; font-size: 20px; color: var(--ink-soft); font-weight: 500; }
+footer .brand { display: flex; align-items: center; gap: 14px; }
+footer .brand img.logo { height: 34px; }
+footer .brand img.svc { height: 24px; }
+footer .url { font-family: var(--f-en); font-weight: 600; letter-spacing: 0.02em; }
+footer .page { font-family: var(--f-en); font-weight: 700; color: var(--teal-dark); }
+.note { position: absolute; right: 96px; top: 40px; font-size: 17px; color: var(--muted); font-weight: 500; }
+.card { background: var(--white); border-radius: 20px; box-shadow: 0 6px 24px rgba(15, 132, 114, 0.10); }
+
+/* 2カラム */
+.feat { display: grid; grid-template-columns: 560px 1fr; gap: 60px; height: 100%; padding-bottom: 120px; align-items: center; }
+.points { margin-top: 32px; display: grid; gap: 16px; }
+.points li { list-style: none; display: flex; gap: 14px; font-size: 24px; font-weight: 500; line-height: 1.5; }
+.points li::before { content: ""; flex: none; width: 14px; height: 14px; border-radius: 50%; background: var(--teal); margin-top: 12px; }
+.points b { color: var(--teal-dark); }
+
+/* 1: 全体像 */
+.ov { display: grid; grid-template-columns: 520px 1fr; gap: 48px; align-items: center; height: 100%; padding-bottom: 110px; }
+.ov h1 { font-size: 70px; }
+.badges { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.badges span { background: #fff; border: 2px solid var(--teal); color: var(--teal-dark); border-radius: 999px; padding: 5px 18px; font-size: 21px; font-weight: 700; }
+.map { padding: 30px 32px; display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto 40px auto 40px auto; gap: 0 18px; align-items: center; }
+.node { border-radius: 16px; padding: 14px 16px; text-align: center; border: 3px solid var(--line); background: #fff; }
+.node b { display: block; font-size: 25px; font-weight: 900; }
+.node small { display: block; font-size: 16px; color: var(--muted); margin-top: 2px; line-height: 1.4; }
+.node.admin { border-color: var(--blue); background: var(--blue-wash); }
+.node.web { border-color: var(--teal); background: var(--mint); }
+.node.db { border-color: var(--amber); background: var(--amber-wash); }
+.node.ai { border-color: var(--violet); background: var(--violet-wash); }
+.node.bot { border-color: var(--blue); }
+.va { text-align: center; color: var(--teal-dark); font-size: 17px; font-weight: 700; }
+.va::before { content: "↓ "; font-size: 22px; }
+.va.up::before { content: "↑ "; }
+.va.both::before { content: "↕ "; }
+
+/* 2: 議案 */
+.bill { padding: 34px 38px; display: grid; gap: 20px; }
+.bill .tag { display: inline-block; font-size: 17px; font-weight: 700; color: var(--teal-dark); background: var(--mint); border-radius: 999px; padding: 3px 14px; justify-self: start; }
+.bill h2 { font-size: 30px; font-weight: 900; line-height: 1.4; }
+.prog { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.prog div { text-align: center; font-size: 16px; font-weight: 700; padding: 8px 0; border-radius: 8px; background: #eef1f4; color: var(--muted); }
+.prog div.done { background: var(--teal); color: #fff; }
+.prog div.now { background: var(--teal-light); color: #fff; outline: 3px solid var(--mint); }
+.toggle { display: flex; align-items: center; justify-content: space-between; border: 2px solid #eef1f4; border-radius: 12px; padding: 12px 18px; font-size: 19px; font-weight: 700; }
+.sw { width: 56px; height: 30px; border-radius: 15px; background: var(--teal); position: relative; }
+.sw::after { content: ""; position: absolute; right: 4px; top: 4px; width: 22px; height: 22px; border-radius: 50%; background: #fff; }
+.ruby { font-size: 22px; line-height: 2.1; }
+.ruby rt { font-size: 12px; color: var(--teal-dark); }
+.stance { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: center; border-radius: 14px; background: #f7f4ee; padding: 14px 18px; }
+.stance .yes { font-size: 22px; font-weight: 900; color: #fff; background: var(--teal); border-radius: 10px; padding: 6px 16px; }
+.stance p { font-size: 18px; color: var(--ink-soft); line-height: 1.5; }
+
+/* 3: チャット */
+.chat { padding: 30px 32px; display: grid; gap: 16px; }
+.msg { max-width: 82%; font-size: 21px; line-height: 1.6; padding: 14px 20px; border-radius: 18px; }
+.msg.me { justify-self: end; background: var(--teal); color: #fff; border-bottom-right-radius: 4px; }
+.msg.ai { background: #f3f4f6; border-bottom-left-radius: 4px; }
+.msg.ai .typing { display: inline-block; width: 10px; height: 22px; background: var(--teal); vertical-align: middle; margin-left: 4px; }
+.suggest { border: 2px dashed var(--violet); border-radius: 14px; padding: 12px 18px; font-size: 19px; font-weight: 700; color: var(--violet); background: var(--violet-wash); }
+.limit { display: flex; gap: 10px; flex-wrap: wrap; }
+.limit span { font-size: 16px; font-weight: 700; padding: 5px 14px; border-radius: 999px; background: var(--mint); color: var(--teal-dark); }
+
+/* 4,5: ステップ */
+.flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; margin-top: 48px; }
+.st { padding: 24px 20px; display: grid; gap: 10px; align-content: start; position: relative; min-height: 360px; }
+.st .n { font-family: var(--f-en); font-weight: 700; font-size: 20px; color: #fff; background: var(--teal); width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; }
+.st.ai .n { background: var(--violet); }
+.st b { font-size: 28px; font-weight: 900; line-height: 1.35; }
+.st p { font-size: 20.5px; color: var(--ink-soft); line-height: 1.6; }
+.st:not(:last-child)::after { content: "▶"; position: absolute; right: -16px; top: 50%; transform: translateY(-50%); color: var(--teal); font-size: 18px; }
+.st .hd { display: flex; align-items: center; gap: 10px; height: 40px; }
+.st .ai-tag { font-size: 14px; font-weight: 700; color: var(--violet); background: var(--violet-wash); border-radius: 6px; padding: 1px 10px; }
+.modes { display: flex; gap: 14px; margin-top: 26px; }
+.modes div { background: #fff; border: 2px solid var(--violet); border-radius: 14px; padding: 10px 18px; font-size: 19px; font-weight: 700; }
+.modes small { display: block; font-size: 15px; color: var(--muted); font-weight: 500; }
+.band { margin-top: 26px; display: flex; gap: 16px; align-items: center; font-size: 22px; font-weight: 700; color: var(--teal-dark); }
+.band span { background: #fff; border: 2px solid var(--teal); border-radius: 999px; padding: 6px 20px; }
+
+/* 6: 管理画面 */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
+.tile { padding: 40px 36px; min-height: 220px; display: grid; grid-template-columns: 64px 1fr; gap: 18px; align-items: start; }
+.tile .ic { width: 64px; height: 64px; border-radius: 16px; display: grid; place-items: center; font-size: 30px; font-weight: 900; color: #fff; background: var(--violet); font-family: var(--f-en); }
+.tile.t .ic { background: var(--teal); }
+.tile.b .ic { background: var(--blue); }
+.tile b { font-size: 30px; font-weight: 900; display: block; }
+.tile p { font-size: 21px; color: var(--ink-soft); line-height: 1.55; margin-top: 4px; }
+
+/* 7: 技術 */
+.stack { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 44px; }
+.sc { padding: 28px 30px; min-height: 196px; display: grid; gap: 10px; align-content: start; }
+.sc h3 { font-size: 24px; font-weight: 900; color: var(--teal-dark); display: flex; align-items: center; gap: 10px; }
+.sc h3::before { content: ""; width: 8px; height: 22px; background: var(--teal); border-radius: 4px; }
+.sc ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+.sc li { font-size: 20px; font-weight: 700; background: #f3f4f6; border-radius: 8px; padding: 4px 12px; }
+.oss { margin-top: 36px; display: flex; align-items: center; gap: 18px; font-size: 24px; font-weight: 700; }
+.oss .gh { font-family: var(--f-en); background: var(--ink); color: #fff; border-radius: 12px; padding: 8px 20px; font-size: 24px; }
+</style>
+</head>
+<body>
+
+<!-- 1 全体像 -->
+<section class="slide" id="s1">
+  <div class="ov">
+    <div>
+      <div class="kicker"><span class="no">01</span>全体像</div>
+      <h1>みらい議会の<br><em>しくみ</em></h1>
+      <p class="sub">議案の解説を読む・AI に聞く・AI のインタビューで意見を届ける。その裏側は、2つのアプリと1つのデータベース、そして AI でできています。</p>
+      <div class="badges"><span>Next.js</span><span>Supabase</span><span>Vercel AI SDK</span><span>Cloud Run</span><span>オープンソース</span></div>
+    </div>
+    <div class="card map">
+      <div class="node admin"><b>管理画面</b><small>運営スタッフが<br>解説・賛否を書く</small></div>
+      <div class="node db" style="grid-row: 3; grid-column: 1"><b>データベース</b><small>Supabase</small></div>
+      <div class="node web" style="grid-row: 5; grid-column: 1"><b>公開サイト</b><small>だれでも見られる</small></div>
+      <div class="va" style="grid-row: 2; grid-column: 1">書きこむ</div>
+      <div class="va" style="grid-row: 4; grid-column: 1">読みだす</div>
+      <div class="node" style="grid-row: 5; grid-column: 2"><b>市民</b><small>読む・聞く・話す</small></div>
+      <div class="node ai" style="grid-row: 3; grid-column: 2"><b>AI</b><small>AI Gateway<br>OpenAI・Claude・Gemini</small></div>
+      <div class="va up" style="grid-row: 4; grid-column: 2">質問・インタビュー</div>
+      <div class="node bot" style="grid-row: 3; grid-column: 3"><b>まとめ<br>ロボット</b><small>Cloud Run Job<br>毎朝6時</small></div>
+      <div class="va both" style="grid-row: 4; grid-column: 3">意見を整理</div>
+      <div class="node web" style="grid-row: 5; grid-column: 3"><b>トピック</b><small>みんなの意見</small></div>
+    </div>
+  </div>
+  <footer><div class="brand"><img class="logo" src="logo.svg" alt=""><img class="svc" src="service-logo.svg" alt="みらい議会"></div><span class="url">github.com/team-mirai/mirai-gikai</span><span class="page">1 / 7</span></footer>
+</section>
+
+<!-- 2 議案 -->
+<section class="slide" id="s2">
+  <span class="note">※画面はイメージです</span>
+  <div class="feat">
+    <div>
+      <div class="kicker"><span class="no">02</span>議案を読む</div>
+      <h1>むずかしい議案を<br><em>やさしく読める</em></h1>
+      <ul class="points">
+        <li><span>解説は「ふつう」と<b>「説明をもっと詳しく」</b>をスイッチで切りかえ</span></li>
+        <li><span>漢字には<b>ふりがな</b>を表示できる</span></li>
+        <li><span>いま国会のどの段階かを<b>進み具合</b>で表示</span></li>
+        <li><span>チームみらいの<b>賛否と判断の理由</b>。公開日時の予約にも対応</span></li>
+      </ul>
+    </div>
+    <div class="card bill">
+      <span class="tag">第○回国会 ・ 衆議院で審議中</span>
+      <h2>○○に関する法律の一部を改正する法律案</h2>
+      <div class="prog"><div class="done">法案提出</div><div class="now">衆議院審議</div><div>参議院審議</div><div>法案成立</div></div>
+      <div class="toggle"><span>説明をもっと詳しく</span><span class="sw"></span></div>
+      <p class="ruby"><ruby>国会<rt>こっかい</rt></ruby>で<ruby>話<rt>はな</rt></ruby>し<ruby>合<rt>あ</rt></ruby>われている<ruby>内容<rt>ないよう</rt></ruby>を、<ruby>身近<rt>みぢか</rt></ruby>な<ruby>例<rt>れい</rt></ruby>で<ruby>説明<rt>せつめい</rt></ruby>します。</p>
+      <div class="stance"><span class="yes">賛成</span><p>判断の理由と補足情報を、要点ごとに読めます。</p></div>
+    </div>
+  </div>
+  <footer><div class="brand"><img class="logo" src="logo.svg" alt=""><img class="svc" src="service-logo.svg" alt="みらい議会"></div><span class="url">github.com/team-mirai/mirai-gikai</span><span class="page">2 / 7</span></footer>
+</section>
+
+<!-- 3 チャット -->
+<section class="slide" id="s3">
+  <span class="note">※画面はイメージです</span>
+  <div class="feat">
+    <div>
+      <div class="kicker"><span class="no">03</span>AI チャット</div>
+      <h1>わからないことは<br><em>AI に聞ける</em></h1>
+      <ul class="points">
+        <li><span>答えは<b>その議案の解説</b>をもとに作る。議案の情報はサーバーが取り直すので、ブラウザから書きかえられない</span></li>
+        <li><span>答えは<b>少しずつ表示</b>（ストリーミング）</span></li>
+        <li><span>登録なしで使える<b>匿名ユーザー</b>。1人あたり・全体の<b>利用料に上限</b></span></li>
+        <li><span>話の流れで<b>インタビューへの参加</b>を提案</span></li>
+      </ul>
+    </div>
+    <div class="card chat">
+      <div class="msg me">この法案で、わたしの生活は何が変わるの？</div>
+      <div class="msg ai">ざっくり言うと、3つのポイントがあります。まず1つめは…<span class="typing"></span></div>
+      <div class="msg me">2つめをもう少しくわしく！</div>
+      <div class="suggest">💬 この議案について、AI インタビューで意見を聞かせてください</div>
+      <div class="limit"><span>匿名ログイン</span><span>1日の利用料の上限</span><span>Langfuse で記録</span></div>
+    </div>
+  </div>
+  <footer><div class="brand"><img class="logo" src="logo.svg" alt=""><img class="svc" src="service-logo.svg" alt="みらい議会"></div><span class="url">github.com/team-mirai/mirai-gikai</span><span class="page">3 / 7</span></footer>
+</section>
+
+<!-- 4 インタビュー -->
+<section class="slide" id="s4">
+  <div class="kicker"><span class="no">04</span>AI インタビュー</div>
+  <h1>あなたの声を、<em>AI が聞きとる</em></h1>
+  <div class="modes">
+    <div>bulk<small>まとめて聞く</small></div>
+    <div>loop<small>そのつど深ぼり</small></div>
+    <div>targeted<small>相手を見て聞く</small></div>
+  </div>
+  <div class="flow">
+    <div class="card st"><div class="hd"><span class="n">1</span></div><b>同意して<br>スタート</b><p>AI に渡す質問や指示は、開示ページでだれでも見られる</p></div>
+    <div class="card st ai"><div class="hd"><span class="n">2</span><span class="ai-tag">AI が担当</span></div><b>AI が質問</b><p>話すたびに保存。まだ聞いていない質問と残り時間から次を決める</p></div>
+    <div class="card st ai"><div class="hd"><span class="n">3</span><span class="ai-tag">AI が担当</span></div><b>まとめを<br>確認</b><p>要約・立場・意見のリストを作成。直してほしい点はチャットで</p></div>
+    <div class="card st ai"><div class="hd"><span class="n">4</span><span class="ai-tag">AI が担当</span></div><b>不適切<br>チェック</b><p>別の AI が点数で判定。意見は1件ずつ分けて保存</p></div>
+    <div class="card st"><div class="hd"><span class="n">5</span></div><b>公開を<br>選ぶ</b><p>公開するかは本人が決める。スタッフも確認して公開</p></div>
+  </div>
+  <footer><div class="brand"><img class="logo" src="logo.svg" alt=""><img class="svc" src="service-logo.svg" alt="みらい議会"></div><span class="url">github.com/team-mirai/mirai-gikai</span><span class="page">4 / 7</span></footer>
+</section>
+
+<!-- 5 トピック -->
+<section class="slide" id="s5">
+  <div class="kicker"><span class="no">05</span>トピック分析</div>
+  <h1>たくさんの意見を<em>話題ごとに整理</em></h1>
+  <div class="band"><span>⏰ 毎朝 6:00 に自動実行</span><span>新しい意見だけ追加で仕分け</span><span>終わったら自動で公開</span></div>
+  <div class="flow">
+    <div class="card st"><div class="hd"><span class="n">1</span></div><b>意見を<br>集める</b><p>公開ずみ・チェック合格のレポートの意見だけを使う</p></div>
+    <div class="card st ai"><div class="hd"><span class="n">2</span><span class="ai-tag">AI が担当</span></div><b>話題を<br>見つける</b><p>どんな話題があるか、候補を出す</p></div>
+    <div class="card st ai"><div class="hd"><span class="n">3</span><span class="ai-tag">AI が担当</span></div><b>まとめる</b><p>にた話題を合体して、トピックを決める</p></div>
+    <div class="card st ai"><div class="hd"><span class="n">4</span><span class="ai-tag">AI が担当</span></div><b>仕分ける</b><p>それぞれの意見を、トピックに割り当てる</p></div>
+    <div class="card st"><div class="hd"><span class="n">5</span></div><b>2階層で<br>見せる</b><p>大きな話題の下に小さな話題。代表的な意見も表示</p></div>
+  </div>
+  <footer><div class="brand"><img class="logo" src="logo.svg" alt=""><img class="svc" src="service-logo.svg" alt="みらい議会"></div><span class="url">github.com/team-mirai/mirai-gikai</span><span class="page">5 / 7</span></footer>
+</section>
+
+<!-- 6 管理画面 -->
+<section class="slide" id="s6">
+  <div class="kicker"><span class="no">06</span>管理画面</div>
+  <h1>運営も <em>AI と一緒に</em></h1>
+  <div class="grid2">
+    <div class="card tile"><span class="ic">Q</span><div><b>質問づくりを AI と対話で</b><p>議案の本文から、インタビューのテーマや質問の案を一緒に考える</p></div></div>
+    <div class="card tile"><span class="ic">▶</span><div><b>本番前に模擬インタビュー</b><p>AI が回答者役を何人も演じ、聞き方のわかりやすさや満足度を採点</p></div></div>
+    <div class="card tile t"><span class="ic">✓</span><div><b>届いたレポートの確認</b><p>不適切チェックと内容の充実度の点数、統計、条件をしぼった一括公開</p></div></div>
+    <div class="card tile b"><span class="ic">M</span><div><b>AI エージェントから操作（MCP）</b><p>Claude などが議案・賛否・統計をツールとして読み書きできる</p></div></div>
+  </div>
+  <footer><div class="brand"><img class="logo" src="logo.svg" alt=""><img class="svc" src="service-logo.svg" alt="みらい議会"></div><span class="url">github.com/team-mirai/mirai-gikai</span><span class="page">6 / 7</span></footer>
+</section>
+
+<!-- 7 技術 -->
+<section class="slide" id="s7">
+  <div class="kicker"><span class="no">07</span>技術スタック</div>
+  <h1>使っている<em>技術</em></h1>
+  <div class="stack">
+    <div class="card sc"><h3>画面</h3><ul><li>Next.js 15</li><li>React 19</li><li>TypeScript</li><li>Tailwind CSS</li><li>Radix UI</li></ul></div>
+    <div class="card sc"><h3>データ</h3><ul><li>Supabase</li><li>PostgreSQL</li><li>RLS</li><li>zod</li></ul></div>
+    <div class="card sc"><h3>AI</h3><ul><li>Vercel AI SDK</li><li>AI Gateway</li><li>Langfuse</li><li>MCP</li></ul></div>
+    <div class="card sc"><h3>動かす場所</h3><ul><li>Vercel</li><li>Cloud Run Job</li><li>Cloud Scheduler</li></ul></div>
+    <div class="card sc"><h3>品質</h3><ul><li>Vitest</li><li>Biome</li><li>GitHub Actions</li><li>Codecov</li></ul></div>
+    <div class="card sc"><h3>設計</h3><ul><li>feature 単位の構成</li><li>repository 層</li><li>packages で共有</li></ul></div>
+  </div>
+  <div class="oss"><span class="gh">GitHub</span><span>コードはすべて公開中。だれでも読めて、改善を提案できます</span></div>
+  <footer><div class="brand"><img class="logo" src="logo.svg" alt=""><img class="svc" src="service-logo.svg" alt="みらい議会"></div><span class="url">github.com/team-mirai/mirai-gikai</span><span class="page">7 / 7</span></footer>
+</section>
+
+<script>
+const id = (location.hash || "#s1").slice(1);
+document.getElementById(id).classList.add("on");
+</script>
+</body>
+</html>
