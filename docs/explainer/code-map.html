@@ -514,13 +514,20 @@ dialog.viewer::backdrop { background: rgba(20, 40, 36, .55); }
 .xr.item .xm { grid-column: 2; font-size: 13.5px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 2px; }
 .xr.item .tb { grid-row: 1 / span 2; }
 .xr.path code { background: none; padding: 0; font-size: 12.5px; color: var(--teal-dark); overflow-wrap: anywhere; }
+
+.site-bar .unofficial-badge { margin-left: auto; flex: none; font-size: 12px; font-weight: 700; color: #8a5a00; border: 1px solid #e3c27a; background: #fdf6e3; border-radius: 6px; padding: 3px 10px; }
+.unofficial { margin: 20px 24px 0; padding: 14px 18px; border: 1px solid #e3c27a; border-left: 4px solid #c58a00; background: #fdf6e3; border-radius: 8px; }
+.unofficial b { display: block; font-size: 15px; color: #8a5a00; margin-bottom: 4px; }
+.unofficial p { margin: 0; font-size: 14px; line-height: 1.7; color: var(--ink-soft); }
+.unofficial a, .unofficial-foot a { color: inherit; }
+.unofficial-foot { margin: 56px 24px 24px; padding-top: 16px; border-top: 1px solid var(--rule); font-size: 13px; color: var(--ink-soft); }
 </style>
 </head>
 <body>
-<header class="site-bar"><a class="brand" href="中学生向け_しくみ図鑑.html" aria-label="みらい議会 解説資料"><img class="mark" src="assets/logo.svg" alt=""><img class="word" src="assets/service-logo.svg" alt="みらい議会"></a><ul class="docs"><li><a href="中学生向け_しくみ図鑑.html">しくみ図鑑</a></li><li><a href="コード逆引き.html" aria-current="page">コード逆引き</a></li><li><a href="AIインタビュー仕様.html">AIインタビュー仕様</a></li></ul></header>
+<header class="site-bar"><a class="brand" href="how-it-works.html" aria-label="みらい議会 解説資料"><img class="mark" src="assets/logo.svg" alt=""><img class="word" src="assets/service-logo.svg" alt="みらい議会"></a><ul class="docs"><li><a href="how-it-works.html">しくみ図鑑</a></li><li><a href="code-map.html" aria-current="page">コード逆引き</a></li><li><a href="ai-interview-spec.html">AIインタビュー仕様</a></li></ul><span class="unofficial-badge">非公式</span></header>
 <div class="layout">
 <aside class="side"><p class="side-h">目次</p><nav class="toc" aria-label="目次"><ol><li><a href="#system"><span class="no">01</span>システム構成</a></li><li><a href="#screens"><span class="no">02</span>画面遷移図</a></li><li><a href="#features"><span class="no">03</span>フィーチャーマップ</a></li><li><a href="#layers"><span class="no">04</span>レイヤー構成</a></li><li><a href="#requests"><span class="no">05</span>リクエストの流れ</a></li><li><a href="#data"><span class="no">06</span>データモデル</a></li><li><a href="#lookup"><span class="no">07</span>機能の逆引き</a></li><li><a href="#crosscut"><span class="no">08</span>横断的な仕組みの場所</a></li></ol></nav><img class="side-ill" src="assets/inspiration-simple-green.svg" alt=""></aside>
-<main class="main">
+<main class="main"><aside class="unofficial" role="note"><b>非公式の解説資料です</b><p>この資料は、チームみらい・みらい議会の公式資料ではありません。オープンソースで公開されている <a href="https://github.com/team-mirai/mirai-gikai">team-mirai/mirai-gikai</a> のソースコードを、個人が読んでまとめたものです。内容の正確さは保証できず、最新のコードと違う場合があります。</p></aside>
 <header class="cover"><div class="wrap">
   <h1>みらい議会<br><em>コード逆引き</em></h1>
   <p class="lead">構成図でシステムの全体像をつかんでから、この機能のコードはどこにあるのかを、画面や API の単位で引けるようにしたリファレンスです。逆引きのファイルパスは、クリックするとコピーできます。</p>
@@ -711,7 +718,7 @@ document.addEventListener("click", async (e) => {
   all();
 })();
 </script>
-</main>
+<p class="unofficial-foot">非公式の解説資料です。チームみらい・みらい議会とは関係ありません。ソースコード：<a href="https://github.com/team-mirai/mirai-gikai">github.com/team-mirai/mirai-gikai</a></p></main>
 </div>
 <script>
 // 今読んでいる章を、サイドバーの目次で示す

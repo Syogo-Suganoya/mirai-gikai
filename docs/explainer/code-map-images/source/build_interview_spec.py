@@ -377,5 +377,5 @@ def page():
 
 
 if __name__ == "__main__":
-    open("AIインタビュー仕様.html", "w").write(page())
+    open("ai-interview-spec.html", "w").write(page())
     print("ok")

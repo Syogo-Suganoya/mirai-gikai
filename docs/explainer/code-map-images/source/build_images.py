@@ -1,4 +1,4 @@
-"""コード逆引きの画像用 HTML（images.html）を作る。撮影は _memo/tools/shots.js（Puppeteer）で行う。"""
+"""コード逆引きの画像用 HTML（images.html）を作る。撮影は docs/explainer/tools/shots.js（Puppeteer）で行う。"""
 import json, os, re, subprocess, sys
 from diagrams import ALL
 from svg import SVG_CSS

@@ -1,7 +1,7 @@
 /**
- * _memo の画像（コード逆引き12枚・X用7枚）を撮り直す。
+ * docs/explainer の画像（コード逆引き12枚・X用7枚）を撮り直す。
  *
- *   cd _memo/tools && npm install && npm run shots
+ *   cd docs/explainer/tools && npm install && npm run shots
  *
  * ブラウザは1つだけ起動して、ページの切り替えだけで全部撮る。
  * 高さは要素ごとのスクリーンショットに任せるので、事前に測らなくてよい。

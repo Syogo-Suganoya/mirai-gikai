@@ -1,8 +1,8 @@
 """X 投稿用の画像シリーズ（エンジニア向け：4テーマ×4枚＝16枚）の HTML を作る。
-内容は主に 中学生向け_しくみ図鑑.html（一部はコード逆引き）から取り、画面は assets/screens のスクショを使う。
+内容は主に how-it-works.html（一部はコード逆引き）から取り、画面は assets/screens のスクショを使う。
 
 見た目は x-images/source/slides.html と同じ（CSS をそのまま読みこむ）。
-撮影は 解説資料/tools で `npm run shots`。posts.html の section を1枚ずつ撮る。
+撮影は docs/explainer/tools で `npm run shots`。posts.html の section を1枚ずつ撮る。
 
     python3 build_posts.py   # → posts.html
 """
@@ -122,7 +122,7 @@ SHOT = "../../assets/screens/"
 LOGO = "../../assets/logos/"
 
 # 技術のロゴ（しくみ図鑑のバッジの SVG を使う。ないものは diagrams のアイコン）
-_kids = open(os.path.join(HERE, "../../中学生向け_しくみ図鑑.html")).read()
+_kids = open(os.path.join(HERE, "../../how-it-works.html")).read()
 TL = {name.strip(): svg for svg, name in _re.findall(r'<li>(<svg class="tl".*?</svg>)([^<]+)</li>', _kids, _re.S)}
 for k, f in {"PostgreSQL": "postgresql", "OpenAI": "openai", "Anthropic": "anthropic", "Gemini": "gemini", "Langfuse": "activity", "Cloud Run": "cloud-run"}.items():
     TL[k] = f'<img class="tl" src="{LOGO}{f}.png" alt="">'

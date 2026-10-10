@@ -254,5 +254,5 @@ syncChips(); render();
 
 
 if __name__ == "__main__":
-    open("コード逆引き.html", "w").write(page())
+    open("code-map.html", "w").write(page())
     print("ok")

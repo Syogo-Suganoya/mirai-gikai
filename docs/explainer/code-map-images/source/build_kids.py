@@ -407,5 +407,5 @@ def page():
 
 
 if __name__ == "__main__":
-    open("中学生向け_しくみ図鑑.html", "w").write(page())
+    open("how-it-works.html", "w").write(page())
     print("ok")

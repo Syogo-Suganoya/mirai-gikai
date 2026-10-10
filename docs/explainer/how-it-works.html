@@ -256,13 +256,20 @@ body { padding-top: var(--bar-h); }
   .side nav.toc a { white-space: nowrap; padding: 6px 10px; }
   .side .side-ill { display: none; }
 }
+
+.site-bar .unofficial-badge { margin-left: auto; flex: none; font-size: 12px; font-weight: 700; color: #8a5a00; border: 1px solid #e3c27a; background: #fdf6e3; border-radius: 6px; padding: 3px 10px; }
+.unofficial { margin: 20px 24px 0; padding: 14px 18px; border: 1px solid #e3c27a; border-left: 4px solid #c58a00; background: #fdf6e3; border-radius: 8px; }
+.unofficial b { display: block; font-size: 15px; color: #8a5a00; margin-bottom: 4px; }
+.unofficial p { margin: 0; font-size: 14px; line-height: 1.7; color: var(--ink-soft); }
+.unofficial a, .unofficial-foot a { color: inherit; }
+.unofficial-foot { margin: 56px 24px 24px; padding-top: 16px; border-top: 1px solid var(--rule); font-size: 13px; color: var(--ink-soft); }
 </style>
 </head>
 <body>
-<header class="site-bar"><a class="brand" href="中学生向け_しくみ図鑑.html" aria-label="みらい議会 解説資料"><img class="mark" src="assets/logo.svg" alt=""><img class="word" src="assets/service-logo.svg" alt="みらい議会"></a><ul class="docs"><li><a href="中学生向け_しくみ図鑑.html" aria-current="page">しくみ図鑑</a></li><li><a href="コード逆引き.html">コード逆引き</a></li><li><a href="AIインタビュー仕様.html">AIインタビュー仕様</a></li></ul></header>
+<header class="site-bar"><a class="brand" href="how-it-works.html" aria-label="みらい議会 解説資料"><img class="mark" src="assets/logo.svg" alt=""><img class="word" src="assets/service-logo.svg" alt="みらい議会"></a><ul class="docs"><li><a href="how-it-works.html" aria-current="page">しくみ図鑑</a></li><li><a href="code-map.html">コード逆引き</a></li><li><a href="ai-interview-spec.html">AIインタビュー仕様</a></li></ul><span class="unofficial-badge">非公式</span></header>
 <div class="layout">
 <aside class="side"><p class="side-h">目次</p><nav class="toc" aria-label="目次"><ol><li><a href="#what"><span class="no">01</span>何をするサービス？</a></li><li><a href="#map"><span class="no">02</span>全体の地図</a></li><li><a href="#layers"><span class="no">03</span>プログラムの役割分担</a></li><li><a href="#bill"><span class="no">04</span>議案ページが表示されるまで</a></li><li><a href="#chat"><span class="no">05</span>AI に質問するしくみ</a></li><li><a href="#interview"><span class="no">06</span>AI インタビューのしくみ</a></li><li><a href="#topics"><span class="no">07</span>みんなの意見をまとめるしくみ</a></li><li><a href="#db"><span class="no">08</span>データベースの中身</a></li><li><a href="#tools"><span class="no">09</span>使っている道具</a></li><li><a href="#quality"><span class="no">10</span>ミスや悪用を防ぐしくみ</a></li><li><a href="#words"><span class="no">11</span>用語集</a></li></ol></nav></aside>
-<main class="main">
+<main class="main"><aside class="unofficial" role="note"><b>非公式の解説資料です</b><p>この資料は、チームみらい・みらい議会の公式資料ではありません。オープンソースで公開されている <a href="https://github.com/team-mirai/mirai-gikai">team-mirai/mirai-gikai</a> のソースコードを、個人が読んでまとめたものです。内容の正確さは保証できず、最新のコードと違う場合があります。</p></aside>
 <header class="cover"><div class="wrap">
   <img class="cover-ill" src="assets/readingbook_woman_green.png" alt="">
   <h1>みらい議会の<em>中身</em>を<br>のぞいてみよう</h1>
@@ -403,7 +410,7 @@ body { padding-top: var(--bar-h); }
 </section>
 
 </div>
-</main>
+<p class="unofficial-foot">非公式の解説資料です。チームみらい・みらい議会とは関係ありません。ソースコード：<a href="https://github.com/team-mirai/mirai-gikai">github.com/team-mirai/mirai-gikai</a></p></main>
 </div>
 <script>
 // 今読んでいる章を、サイドバーの目次で示す

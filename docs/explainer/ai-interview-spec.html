@@ -185,13 +185,20 @@ body { padding-top: var(--bar-h); }
 .chain .cs { display: inline-flex; align-items: center; gap: 6px; background: var(--mint); color: var(--teal-dark); border-radius: 999px; padding: 2px 12px 2px 4px; font-size: 13.5px; font-weight: 700; }
 .chain .cs i { font: 700 11px/20px var(--f-en); width: 20px; height: 20px; border-radius: 50%; background: var(--teal); color: #fff; text-align: center; }
 .chain .ca { color: var(--teal); font-weight: 700; }
+
+.site-bar .unofficial-badge { margin-left: auto; flex: none; font-size: 12px; font-weight: 700; color: #8a5a00; border: 1px solid #e3c27a; background: #fdf6e3; border-radius: 6px; padding: 3px 10px; }
+.unofficial { margin: 20px 24px 0; padding: 14px 18px; border: 1px solid #e3c27a; border-left: 4px solid #c58a00; background: #fdf6e3; border-radius: 8px; }
+.unofficial b { display: block; font-size: 15px; color: #8a5a00; margin-bottom: 4px; }
+.unofficial p { margin: 0; font-size: 14px; line-height: 1.7; color: var(--ink-soft); }
+.unofficial a, .unofficial-foot a { color: inherit; }
+.unofficial-foot { margin: 56px 24px 24px; padding-top: 16px; border-top: 1px solid var(--rule); font-size: 13px; color: var(--ink-soft); }
 </style>
 </head>
 <body>
-<header class="site-bar"><a class="brand" href="中学生向け_しくみ図鑑.html" aria-label="みらい議会 解説資料"><img class="mark" src="assets/logo.svg" alt=""><img class="word" src="assets/service-logo.svg" alt="みらい議会"></a><ul class="docs"><li><a href="中学生向け_しくみ図鑑.html">しくみ図鑑</a></li><li><a href="コード逆引き.html">コード逆引き</a></li><li><a href="AIインタビュー仕様.html" aria-current="page">AIインタビュー仕様</a></li></ul></header>
+<header class="site-bar"><a class="brand" href="how-it-works.html" aria-label="みらい議会 解説資料"><img class="mark" src="assets/logo.svg" alt=""><img class="word" src="assets/service-logo.svg" alt="みらい議会"></a><ul class="docs"><li><a href="how-it-works.html">しくみ図鑑</a></li><li><a href="code-map.html">コード逆引き</a></li><li><a href="ai-interview-spec.html" aria-current="page">AIインタビュー仕様</a></li></ul><span class="unofficial-badge">非公式</span></header>
 <div class="layout">
 <aside class="side"><p class="side-h">目次</p><nav class="toc" aria-label="目次"><ol><li><a href="#overview"><span class="no">01</span>概要</a></li><li><a href="#screens"><span class="no">02</span>画面と API</a></li><li><a href="#config"><span class="no">03</span>インタビュー設定（管理画面）</a></li><li><a href="#session"><span class="no">04</span>セッションと会話の保存</a></li><li><a href="#modes"><span class="no">05</span>3つのモード</a></li><li><a href="#stages"><span class="no">06</span>ステージ遷移</a></li><li><a href="#output"><span class="no">07</span>AI の出力形式</a></li><li><a href="#ui"><span class="no">08</span>チャット画面の補助機能</a></li><li><a href="#complete"><span class="no">09</span>提出と完了処理</a></li><li><a href="#publish"><span class="no">10</span>公開のルール</a></li><li><a href="#consent"><span class="no">11</span>同意と専門家登録</a></li><li><a href="#safety"><span class="no">12</span>コスト・安全・権限</a></li><li><a href="#admin"><span class="no">13</span>管理画面の運用機能</a></li><li><a href="#files"><span class="no">14</span>主なファイル</a></li></ol></nav></aside>
-<main class="main">
+<main class="main"><aside class="unofficial" role="note"><b>非公式の解説資料です</b><p>この資料は、チームみらい・みらい議会の公式資料ではありません。オープンソースで公開されている <a href="https://github.com/team-mirai/mirai-gikai">team-mirai/mirai-gikai</a> のソースコードを、個人が読んでまとめたものです。内容の正確さは保証できず、最新のコードと違う場合があります。</p></aside>
 <header class="cover"><div class="wrap">
   <img class="cover-ill" src="assets/interview-illustration.png" alt="">
   <h1>みらい議会<br><em>AIインタビュー仕様</em></h1>
@@ -296,7 +303,7 @@ body { padding-top: var(--bar-h); }
   <div class="tw"><table><thead><tr><th style="width:24%">役割</th><th>場所</th></tr></thead><tbody><tr><td>チャット API ・ 1往復の処理</td><td><code>web/src/app/api/interview/chat/route.ts</code><br><code>web/src/features/interview-session/server/services/handle-interview-chat-request.ts</code></td></tr><tr><td>最初の質問</td><td><code>web/src/features/interview-session/server/services/generate-initial-question.ts</code><br><code>…/server/loaders/initialize-interview-chat.ts</code></td></tr><tr><td>モード別ロジック</td><td><code>web/src/features/interview-session/server/utils/interview-logic/</code><br><code>…/shared/utils/interview-logic/</code></td></tr><tr><td>プロンプト本文</td><td><code>packages/shared/src/interview-prompts/</code>（bulk / loop / targeted / summary / stage-transition-guidance）</td></tr><tr><td>出力スキーマ</td><td><code>web/src/features/interview-session/shared/schemas.ts</code><br><code>packages/shared/src/interview-report/schema.ts</code></td></tr><tr><td>チャット画面</td><td><code>web/src/features/interview-session/client/components/interview-chat-client.tsx</code><br><code>…/client/hooks/use-interview-chat.ts</code></td></tr><tr><td>提出・完了</td><td><code>web/src/app/api/interview/complete/route.ts</code><br><code>…/server/services/complete-interview-session.ts</code></td></tr><tr><td>公開ルール</td><td><code>packages/shared/src/report-publication/auto-publish.ts</code><br><code>packages/shared/src/moderation/moderation.ts</code></td></tr><tr><td>設定の編集（admin）</td><td><code>admin/src/features/interview-config/</code></td></tr><tr><td>レポート管理（admin）</td><td><code>admin/src/features/interview-reports/</code></td></tr><tr><td>シミュレーション（admin）</td><td><code>admin/src/features/interview-simulation/</code></td></tr></tbody></table></div>
 </section>
 </div>
-</main>
+<p class="unofficial-foot">非公式の解説資料です。チームみらい・みらい議会とは関係ありません。ソースコード：<a href="https://github.com/team-mirai/mirai-gikai">github.com/team-mirai/mirai-gikai</a></p></main>
 </div>
 <script>
 // 今読んでいる章を、サイドバーの目次で示す

@@ -2,7 +2,7 @@
  * 画面遷移図に入れる、実際の画面のスクリーンショットを撮る。
  *
  *   npx supabase start && pnpm seed && pnpm dev   （リポジトリのルートで）
- *   cd 解説資料/tools && node app-shots.js
+ *   cd docs/explainer/tools && node app-shots.js
  *
  * ID はローカルのデータベースから選ぶ。管理画面は pnpm seed の管理者でログインする
  * （ADMIN_EMAIL / ADMIN_PASSWORD で変えられる）。
