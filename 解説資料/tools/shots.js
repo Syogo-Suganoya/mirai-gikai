@@ -38,6 +38,15 @@ const JOBS = [
     viewport: { width: 1600, height: 900 },
     name: (_id, i) => `mirai-gikai-x-${String(i + 1).padStart(2, "0")}.png`,
   },
+  {
+    // X 投稿シリーズ：エンジニア向け4テーマ×4枚（1600×900 固定）
+    html: path.join(MEMO, "x-posts/source/posts.html"),
+    outDir: path.join(MEMO, "x-posts"),
+    selector: "section.slide",
+    visible: ".slide.on",
+    viewport: { width: 1600, height: 900 },
+    name: (id) => `${id}.png`,
+  },
 ];
 
 async function main() {
