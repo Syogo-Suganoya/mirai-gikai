@@ -1,0 +1,10 @@
+{
+  "name": "gikai-memo-shots",
+  "private": true,
+  "scripts": {
+    "shots": "node shots.js"
+  },
+  "dependencies": {
+    "puppeteer-core": "^24.10.0"
+  }
+}

@@ -1,0 +1,411 @@
+from svg import Svg, SVG_CSS
+
+
+def map_svg():
+    s = Svg(900, 520, "みらい議会の全体の地図")
+    s.box(20, 40, 150, 70, "運営メンバー", ["議案の解説を書く"], kind="gray", size=16, sub_size=12)
+    s.box(20, 380, 150, 70, "市民（あなた）", ["読む・聞く・話す"], kind="gray", size=16, sub_size=12)
+    s.box(240, 40, 190, 70, "管理画面", ["admin ・ スタッフ専用"], kind="blue", size=17, sub_size=12)
+    s.box(240, 380, 190, 70, "公開サイト", ["web ・ だれでも見られる"], kind="teal", size=17, sub_size=12)
+    s.box(250, 190, 170, 110, "データベース", ["Supabase", "議案・解説・賛否", "インタビューの記録"], kind="amber", size=17, sub_size=12)
+    s.box(560, 190, 150, 110, "AI", ["Vercel AI Gateway", "OpenAI・Anthropic", "Google のモデル"], kind="violet", size=18, sub_size=12)
+    s.box(730, 380, 150, 92, "まとめロボット", ["Cloud Run Job", "毎朝6時に", "意見を整理"], kind="blue", size=15, sub_size=12)
+    s.arrow([(170, 75), (240, 75)])
+    s.arrow([(170, 415), (240, 415)], both=True)
+    s.arrow([(335, 110), (335, 190)], "書きこむ", at=(345, 156), anchor="start")
+    s.arrow([(335, 300), (335, 380)], "読みだす", at=(345, 346), anchor="start")
+    s.arrow([(430, 415), (520, 415), (520, 270), (560, 270)], "質問・インタビュー", at=(476, 404), kind="violet")
+    s.arrow([(430, 75), (520, 75), (520, 220), (560, 220)], "質問づくり・試運転", at=(476, 66), kind="violet", dashed=True)
+    s.arrow([(805, 380), (805, 300), (710, 300)], kind="violet")
+    s.arrow([(730, 455), (690, 455), (690, 330), (420, 330), (420, 300)], "整理した結果を保存", at=(560, 324))
+    s.text(450, 506, "※ 管理画面で保存すると、公開サイトに「キャッシュ（作りおき）を捨てて」とお知らせが届きます", size=12, anchor="middle")
+    return s.render()
+
+
+def topic_svg():
+    s = Svg(900, 230, "意見をトピックにまとめる流れ")
+    steps = [
+        ("① 意見を集める", ["公開ずみ・チェック合格の", "レポートの意見だけ使う"]),
+        ("② 話題を見つける", ["AI が「どんな話題が", "あるか」候補を出す"]),
+        ("③ まとめる", ["にた話題を合体して", "トピックを決める"]),
+        ("④ 仕分ける", ["それぞれの意見を", "トピックに割り当てる"]),
+        ("⑤ 2階層に", ["大きなトピックの下に", "小さなトピックを並べる"]),
+    ]
+    x = 12
+    for i, (t, ls) in enumerate(steps):
+        s.box(x, 30, 150, 110, t, ls, kind="amber" if i in (1, 2, 3) else "teal", size=15, sub_size=11.5)
+        if i < 4:
+            s.arrow([(x + 150, 85), (x + 184, 85)])
+        x += 184
+    s.text(450, 180, "終わると自動で公開。次の日は「新しく増えた意見」だけを追加で仕分ける（増分分析）ので、AI の利用料が増えすぎない", size=13, anchor="middle")
+    s.text(450, 206, "②〜④で AI（Claude Haiku）を使う。どの意見がどのトピックに入ったかは topic_opinion という表に残る", size=13, anchor="middle")
+    return s.render()
+
+
+CSS = """
+:root {
+  --paper: #f7f4ee; --grid: #ebe4d6; --ink: #1f2937; --ink-soft: #5b6470;
+  --teal: #0f8472; --teal-wash: #dff3ee; --blue: #2f6db5; --blue-wash: #e3edf9;
+  --amber: #b06f00; --amber-wash: #fcefd6; --violet: #6a4fb3; --violet-wash: #ece6f8;
+  --surface: #ffffff; --bg: #f7f4ee; --line: #d8cfbe;
+  --f-display: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Noto Sans JP", sans-serif;
+  --f-body: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #13171b; --grid: #1d242a; --ink: #e6e9ec; --ink-soft: #a3acb5;
+    --teal: #4fcdb7; --teal-wash: #15352f; --blue: #7fb0ec; --blue-wash: #182b42;
+    --amber: #f0b552; --amber-wash: #382a10; --violet: #b49cf0; --violet-wash: #2a2240;
+    --surface: #1b2127; --bg: #13171b; --line: #313a42; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #13171b; --grid: #1d242a; --ink: #e6e9ec; --ink-soft: #a3acb5;
+  --teal: #4fcdb7; --teal-wash: #15352f; --blue: #7fb0ec; --blue-wash: #182b42;
+  --amber: #f0b552; --amber-wash: #382a10; --violet: #b49cf0; --violet-wash: #2a2240;
+  --surface: #1b2127; --bg: #13171b; --line: #313a42; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background-color: var(--paper);
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.85;
+  margin: 0; padding-inline: 16px; padding-block: 0 64px;
+}
+.wrap { max-width: 880px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; line-height: 1.35; margin: 0; }
+p { margin: 0; }
+code { font-family: var(--f-mono); font-size: 0.86em; background: var(--teal-wash); padding: 1px 6px; border-radius: 4px; overflow-wrap: anywhere; }
+a { color: var(--teal); }
+:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+header.cover { padding-block: 56px 32px; display: grid; gap: 18px; }
+.eyebrow { font-family: var(--f-mono); font-size: 13px; letter-spacing: 0.08em; color: var(--teal); }
+.cover h1 { font-size: clamp(32px, 7vw, 54px); font-weight: 900; }
+.cover h1 .hl { background: linear-gradient(transparent 62%, var(--teal-wash) 62%); }
+.lead { font-size: 17px; max-width: 40em; color: var(--ink-soft); }
+.toc { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; padding: 0; list-style: none; }
+.toc a { display: inline-block; text-decoration: none; color: var(--ink); font-size: 14px; border: 1.5px solid var(--line); background: var(--surface); border-radius: 999px; padding: 4px 14px; }
+.toc a:hover { border-color: var(--teal); }
+.toc .n { font-family: var(--f-mono); color: var(--teal); margin-right: 6px; }
+section.chap { padding-block: 40px 8px; display: grid; gap: 18px; scroll-margin-top: 16px; }
+.chap-head { display: flex; align-items: baseline; gap: 14px; border-bottom: 2px solid var(--ink); padding-bottom: 8px; }
+.chap-head .num { font-family: var(--f-mono); font-weight: 600; color: var(--teal); font-size: 15px; }
+.chap-head h2 { font-size: clamp(22px, 4.2vw, 30px); font-weight: 900; }
+.chap p { max-width: 44em; }
+h3 { font-size: 19px; font-weight: 700; }
+.note { background: var(--amber-wash); border: 1.5px dashed var(--amber); border-radius: 10px; padding: 14px 18px; font-size: 15px; display: grid; gap: 4px; }
+.note b { font-family: var(--f-display); color: var(--amber); }
+.duo { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+.card { background: var(--surface); border: 1.5px solid var(--line); border-radius: 14px; padding: 18px 20px; display: grid; gap: 8px; align-content: start; }
+.card .tag { font-family: var(--f-mono); font-size: 12px; color: var(--ink-soft); }
+.card h3 { display: flex; align-items: center; gap: 8px; }
+.dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+.card ul { margin: 0; padding-left: 1.2em; font-size: 15px; }
+figure { margin: 0; }
+.diagram { overflow-x: auto; background: var(--surface); border: 1.5px solid var(--line); border-radius: 14px; padding: 14px; }
+.diagram svg { display: block; width: 100%; height: auto; }
+svg text { font-family: var(--f-body); } svg .m { font-family: var(--f-mono); }
+figcaption { font-size: 13px; color: var(--ink-soft); margin-top: 8px; }
+.layers { display: grid; gap: 6px; }
+.layer { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 14px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; padding: 14px 18px; }
+.layer .who { font-family: var(--f-display); font-weight: 700; font-size: 17px; display: grid; }
+.layer .who .mono { font-family: var(--f-mono); font-size: 12px; color: var(--teal); font-weight: 600; }
+.layer .what { display: grid; gap: 4px; font-size: 15px; }
+.layer .ex { font-size: 13px; color: var(--ink-soft); }
+.arrow-down { text-align: center; font-size: 13px; color: var(--ink-soft); }
+ol.steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; counter-reset: s; }
+ol.steps li { counter-increment: s; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 16px; }
+ol.steps li::before { content: counter(s); font-family: var(--f-mono); font-weight: 600; width: 32px; height: 32px; border-radius: 50%; background: var(--teal); color: var(--surface); display: grid; place-items: center; font-size: 14px; }
+ol.steps.ai li::before { background: var(--violet); }
+ol.steps b { font-family: var(--f-display); }
+ol.steps .f { display: block; font-family: var(--f-mono); font-size: 12px; color: var(--ink-soft); overflow-wrap: anywhere; }
+.modes { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.mode { background: var(--violet-wash); border: 1.5px solid var(--violet); border-radius: 12px; padding: 14px 16px; display: grid; gap: 4px; font-size: 14.5px; }
+.mode b { font-family: var(--f-display); font-size: 17px; }
+.mode .mono { font-family: var(--f-mono); font-size: 12px; color: var(--violet); }
+.tw { overflow-x: auto; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; }
+table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 14.5px; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 13px; color: var(--ink-soft); background: var(--bg); }
+tr:last-child td { border-bottom: none; }
+td.m { font-family: var(--f-mono); font-size: 13px; color: var(--teal); white-space: nowrap; }
+.tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; }
+.tools .card h3 { font-size: 16px; }
+.tools dl { margin: 0; display: grid; gap: 6px; font-size: 14px; }
+.tools dt { font-family: var(--f-mono); font-weight: 600; font-size: 13.5px; }
+.tools dd { margin: 0 0 4px; color: var(--ink-soft); }
+dl.words { display: grid; grid-template-columns: minmax(120px, 200px) minmax(0, 1fr); gap: 0; background: var(--surface); border: 1.5px solid var(--line); border-radius: 12px; overflow: hidden; margin: 0; }
+dl.words dt, dl.words dd { padding: 10px 16px; border-bottom: 1px solid var(--line); margin: 0; }
+dl.words dt { font-family: var(--f-display); font-weight: 700; background: var(--bg); }
+dl.words dd { font-size: 15px; }
+footer { margin-top: 48px; font-size: 13px; color: var(--ink-soft); font-family: var(--f-mono); }
+@media (max-width: 600px) { .layer { grid-template-columns: 1fr; gap: 4px; } dl.words { grid-template-columns: 1fr; } dl.words dt { border-bottom: none; padding-bottom: 0; } }
+"""
+
+
+def page():
+    return f'''<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>みらい議会 しくみ図鑑</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>{CSS}{SVG_CSS}</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="cover">
+  <div class="eyebrow">team-mirai / mirai-gikai ・ 中学生向けガイド</div>
+  <h1>「みらい<span class="hl">議会</span>」の<br>中身をのぞいてみよう</h1>
+  <p class="lead">国会で話し合われている法律の案を、やさしい解説で読んだり、AI に質問したり、AI のインタビューで自分の意見を届けたりできる Web サービスです。このページでは、その中がどんな部品でできていて、データがどう流れているのかを、順番に説明します。</p>
+  <ul class="toc">
+    <li><a href="#what"><span class="n">1</span>何をするサービス？</a></li>
+    <li><a href="#map"><span class="n">2</span>全体の地図</a></li>
+    <li><a href="#layers"><span class="n">3</span>プログラムの役割分担</a></li>
+    <li><a href="#bill"><span class="n">4</span>議案ページが表示されるまで</a></li>
+    <li><a href="#chat"><span class="n">5</span>AI に質問するしくみ</a></li>
+    <li><a href="#interview"><span class="n">6</span>AI インタビューのしくみ</a></li>
+    <li><a href="#topics"><span class="n">7</span>みんなの意見をまとめるしくみ</a></li>
+    <li><a href="#db"><span class="n">8</span>データベースの中身</a></li>
+    <li><a href="#tools"><span class="n">9</span>使っている道具</a></li>
+    <li><a href="#quality"><span class="n">10</span>ミスや悪用を防ぐしくみ</a></li>
+    <li><a href="#words"><span class="n">11</span>用語集</a></li>
+  </ul>
+</header>
+
+<section class="chap" id="what">
+  <div class="chap-head"><span class="num">1</span><h2>何をするサービス？</h2></div>
+  <p>国会では、毎年たくさんの<b>議案（法律の案）</b>が話し合われています。でも、議案の文章はとてもむずかしく、ニュースだけでは「結局なにが変わるの？」が分かりにくいことがあります。</p>
+  <p>みらい議会は、議案ごとに<b>やさしい解説</b>を用意し、分からないところを<b>AI に質問</b>できるようにしています。さらに、AI が聞き役になる<b>インタビュー</b>で「この法律で自分の生活はどうなりそうか」を話すと、その意見がまとめられ、ほかの人の意見と一緒に公開されます。</p>
+  <p>このサービスは、じつは<b>2つの Web アプリ</b>のセットです。</p>
+  <div class="duo">
+    <div class="card">
+      <span class="tag">web/ ・ だれでも見られる</span>
+      <h3><span class="dot" style="background:var(--teal)"></span>公開サイト</h3>
+      <ul>
+        <li>議案の一覧と、会期（国会が開かれている期間）ごとのまとめ</li>
+        <li>議案の解説（「説明をもっと詳しく」で切りかえ）とふりがな</li>
+        <li>チームみらいの賛成・反対と、その理由</li>
+        <li>AI チャットで質問</li>
+        <li>AI インタビューと、みんなの意見・トピックの一覧</li>
+        <li>研究者などが使えるオープンデータ API</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag">admin/ ・ 運営スタッフだけ</span>
+      <h3><span class="dot" style="background:var(--blue)"></span>管理画面</h3>
+      <ul>
+        <li>ログイン（メール・パスワード、または Google）</li>
+        <li>議案の登録、解説の執筆、公開・非公開の切りかえ</li>
+        <li>賛否と理由の登録（公開する日時の予約もできる）</li>
+        <li>インタビューの質問づくり（AI が手伝う）と試運転</li>
+        <li>届いたレポートの確認と公開</li>
+        <li>意見のトピック分析の実行</li>
+      </ul>
+    </div>
+  </div>
+  <div class="note"><b>ポイント</b>見る人用と管理する人用でアプリを分けておくと、公開サイトには「見せる・話す」機能しかないので、だれかが勝手に解説や賛否を書きかえる入り口ができにくくなります。</div>
+</section>
+
+<section class="chap" id="map">
+  <div class="chap-head"><span class="num">2</span><h2>全体の地図</h2></div>
+  <p>サービスを動かしているのは、インターネットの向こうにあるいくつかのコンピューター（サーバー）です。それぞれ別の仕事をしています。</p>
+  <figure>
+    <div class="diagram">{map_svg()}</div>
+    <figcaption>公開サイトと管理画面は Vercel という会社のサーバー、データベースは Supabase、まとめロボットは Google Cloud の上で動いています。</figcaption>
+  </figure>
+  <p>大事なのは、<b>データベースが1つだけ</b>ということです。管理画面で書いた解説を、公開サイトが読みだして表示します。そして、インタビューで話した内容も同じデータベースに保存され、管理画面から確認されます。</p>
+  <p>AI はどれも <b>AI Gateway</b> という「窓口」を通して呼び出します。窓口を1つにしておくと、OpenAI・Anthropic（Claude）・Google のモデルを、名前を書きかえるだけで切りかえられます。</p>
+</section>
+
+<section class="chap" id="layers">
+  <div class="chap-head"><span class="num">3</span><h2>プログラムの役割分担</h2></div>
+  <p>プログラムのファイルは千個以上あります。全部が好き勝手なことをすると、どこを直せばいいのか分からなくなります。そこでこのサービスでは、まず<b>機能ごとに部屋</b>（<code>features/</code> フォルダ）を分け、さらに部屋の中を<b>レストランの係</b>のように分けています。</p>
+  <div class="layers">
+    <div class="layer"><div class="who">入口の案内係<span class="mono">app/…/page.tsx</span></div><div class="what"><span>お客さんが来たURL（例：<code>/bills/123</code>）を見て、「123番の議案ですね」と担当の部屋に案内するだけ。自分では料理しない。</span></div></div>
+    <div class="arrow-down">↓ 案内する</div>
+    <div class="layer"><div class="who">盛りつけ係<span class="mono">server/components/</span></div><div class="what"><span>料理（データ）をお皿にきれいに並べて、画面の形にする。</span><span class="ex">例：<code>bill-detail-layout.tsx</code>（議案ページ全体の並べ方）</span></div></div>
+    <div class="arrow-down">↓ 料理をたのむ</div>
+    <div class="layer"><div class="who">注文係<span class="mono">server/loaders/ ・ actions/</span></div><div class="what"><span><code>loaders</code> は「見せるためのデータを取ってくる」係、<code>actions</code> は「保存」ボタンなどの操作を受ける係。よく出る料理は作りおき（キャッシュ）しておく。</span></div></div>
+    <div class="arrow-down">↓ 段取りを伝える</div>
+    <div class="layer"><div class="who">料理長<span class="mono">server/services/</span></div><div class="what"><span>「まず材料を出して、AI に相談して、結果を保存して…」という段取りを決める。このお店ならではのルールもここ。</span><span class="ex">例：<code>handle-interview-chat-request.ts</code>（インタビューの次の質問を決める段取り）</span></div></div>
+    <div class="arrow-down">↓ 材料を出してもらう</div>
+    <div class="layer"><div class="who">倉庫係<span class="mono">server/repositories/</span></div><div class="what"><span>データベースとのやりとりだけを担当。ほかの係はデータベースに直接さわらない。</span><span class="ex">例：<code>bill-repository.ts</code>（議案を探す・数える）</span></div></div>
+  </div>
+  <p>ボタンを押したときの動きなど、ブラウザの中で動く部品は <code>client/</code>、計算だけをする小さな関数（純粋関数）は <code>shared/</code> に置きます。純粋関数はデータベースがなくても動くので、テストを書きやすいのが利点です。</p>
+  <div class="tw"><table>
+    <thead><tr><th>部屋（feature）</th><th>どんな仕事？</th></tr></thead>
+    <tbody>
+      <tr><td class="m">bills</td><td>議案の一覧・詳細・検索・シェア</td></tr>
+      <tr><td class="m">bill-difficulty</td><td>解説の「ふつう」「詳しく」の切りかえ</td></tr>
+      <tr><td class="m">diet-sessions</td><td>国会の会期（第○回国会）ごとのまとめ</td></tr>
+      <tr><td class="m">chat</td><td>AI チャットと、AI の利用料の管理</td></tr>
+      <tr><td class="m">interview-config / -session / -report</td><td>インタビューの設定・会話・できあがったレポート</td></tr>
+      <tr><td class="m">report-reaction</td><td>レポートへの「参考になった」ボタン</td></tr>
+      <tr><td class="m">user-topic-analysis</td><td>みんなの意見とトピックの表示</td></tr>
+      <tr><td class="m">open-data</td><td>外部の人向けのデータ配布（API）</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="chap" id="bill">
+  <div class="chap-head"><span class="num">4</span><h2>議案ページが表示されるまで</h2></div>
+  <p>あなたがスマホで議案のページを開いたとき、裏側ではこんな順番で仕事が進みます。</p>
+  <ol class="steps">
+    <li><div><b>URL を読みとる</b><br>「<code>/bills/123</code> だから 123番の議案だ」と分かる。Cookie を見て、「詳しく」モードかどうかも確認する。<span class="f">web/src/app/(main)/bills/[id]/page.tsx</span></div></li>
+    <li><div><b>作りおきを探す</b><br>同じ議案・同じモードの作りおき（キャッシュ）があれば、それを使う。作りおきは最大10分でつくり直す。<span class="f">features/bills/server/loaders/get-bill-by-id.ts</span></div></li>
+    <li><div><b>データベースから4つを同時に取る</b><br>なければ、議案の基本情報・チームみらいの賛否・解説の本文・タグを、4つ同時に取りにいく（順番に取るより速い）。<span class="f">features/bills/server/repositories/bill-repository.ts</span></div></li>
+    <li><div><b>予約公開をチェック</b><br>賛否に「○月○日○時に公開」という予約があれば、まだその時刻でないときは隠す。この判定は作りおきの外で毎回やるので、時刻ぴったりに切りかわる。<span class="f">features/bills/shared/utils/hide-unpublished-stance.ts</span></div></li>
+    <li><div><b>画面を組み立てて送る</b><br>サーバーの上で HTML を作ってスマホに送る。ふりがなの切りかえやシェアボタンなど、さわって動く部分だけがスマホの中で動く。<span class="f">features/bills/server/components/bill-detail/bill-detail-layout.tsx</span></div></li>
+  </ol>
+  <div class="note"><b>作りおきを捨てるタイミング</b>運営スタッフが管理画面で解説や賛否を保存すると、管理画面から公開サイトへ「議案の作りおきを捨てて」というお知らせ（<code>/api/revalidate</code>）が届きます。だから、直した内容がすぐに反映されます。</div>
+</section>
+
+<section class="chap" id="chat">
+  <div class="chap-head"><span class="num">5</span><h2>AI に質問するしくみ</h2></div>
+  <p>議案のページやトップページには、AI に質問できるチャットがあります。</p>
+  <ol class="steps ai">
+    <li><div><b>名前のないアカウントを作る</b><br>はじめてチャットを開くと、メールアドレスなしの「匿名ユーザー」が自動で作られる。だれが何回使ったかを数えるため。<span class="f">features/chat/client/hooks/use-anonymous-supabase-user.ts</span></div></li>
+    <li><div><b>使いすぎチェック</b><br>1人あたりの1日の利用料と、サービス全体の1日・1か月の利用料に上限がある。こえていたら「今日はここまで」と返す。<span class="f">features/chat/server/services/cost-tracker.ts ・ system-cost-guard.ts</span></div></li>
+    <li><div><b>AI への「指示書」を作る</b><br>議案の名前・要約・解説の本文を、サーバーがデータベースから取り直して指示書（プロンプト）にはめこむ。ブラウザから送られてきた議案の情報は信用しない。<span class="f">features/chat/server/services/handle-chat-request.ts</span></div></li>
+    <li><div><b>AI が少しずつ答える</b><br>答えは一度にまとめてではなく、文字が少しずつ届く（ストリーミング）。必要ならウェブ検索もする。話の流れによっては「インタビューに参加してみませんか？」と提案する。</div></li>
+    <li><div><b>使った量を記録</b><br>答え終わったら、使った文字数（トークン数）と金額を <code>chat_usage_events</code> に保存する。次の「使いすぎチェック」に使われる。</div></li>
+  </ol>
+</section>
+
+<section class="chap" id="interview">
+  <div class="chap-head"><span class="num">6</span><h2>AI インタビューのしくみ</h2></div>
+  <p>AI インタビューは、AI が記者のように質問して、あなたの経験や考えを聞きとる機能です。運営スタッフは管理画面で、議案ごとに「何を聞くか」と「どう聞くか（モード）」を決めておきます。</p>
+  <div class="modes">
+    <div class="mode"><span class="mono">bulk</span><b>まとめて聞くモード</b><span>用意した質問をまず全部聞き、深ぼりは最後にまとめてする。</span></div>
+    <div class="mode"><span class="mono">loop</span><b>そのつど深ぼりモード</b><span>1つ答えるたびに「それはどうして？」と追加で聞きながら進む。</span></div>
+    <div class="mode"><span class="mono">targeted</span><b>相手を見て聞くモード</b><span>「働いている人だけ」など条件つきの質問は、話の流れから当てはまらないと判断したら飛ばす。</span></div>
+  </div>
+  <ol class="steps ai">
+    <li><div><b>同意してスタート</b><br>説明を読み、AI に話すことに同意してから始める。どんな質問や指示を AI に渡しているかは「開示ページ」でだれでも見られる。</div></li>
+    <li><div><b>話すたびに保存</b><br>あなたが送った文章はまずデータベースに保存される。サーバーは保存済みの会話を見て、まだ聞いていない質問と残り時間から、次に聞くことを決める。<span class="f">features/interview-session/server/services/handle-interview-chat-request.ts</span></div></li>
+    <li><div><b>まとめ（要約）を作る</b><br>質問が終わると、AI が会話をまとめたレポートの下書き（要約・立場・意見のリスト）を作る。あなたが読んで、直してほしいところがあればチャットで伝えると書き直してくれる。</div></li>
+    <li><div><b>不適切チェック</b><br>完了ボタンを押すと、別の AI がレポートに悪口や個人情報などがないかを点数で判定する（モデレーション）。あわせて、意見を1件ずつ分けて保存する。<span class="f">features/interview-session/server/services/complete-interview-session.ts</span></div></li>
+    <li><div><b>公開するか選ぶ</b><br>自分のレポートを公開するかどうかは、あなたが選べる。運営スタッフも管理画面で確認し、問題があれば非公開にできる。公開されたレポートには「参考になった」ボタンがつく。</div></li>
+  </ol>
+  <div class="note"><b>試運転もAIで</b>管理画面には、AI が「回答者役」を何人も演じて模擬インタビューをする機能があります。本番の前に「質問が多すぎないか」「聞き方がわかりにくくないか」をためせます。</div>
+</section>
+
+<section class="chap" id="topics">
+  <div class="chap-head"><span class="num">7</span><h2>みんなの意見をまとめるしくみ</h2></div>
+  <p>インタビューが何百件も集まると、全部読むのは大変です。そこで AI を使って、意見を<b>トピック（話題）ごと</b>に整理します。この重い作業は、公開サイトとは別の「まとめロボット」（Google Cloud の Cloud Run Job）が担当します。</p>
+  <figure><div class="diagram">{topic_svg()}</div></figure>
+  <p>まとめロボットは毎朝6時に目を覚まし、全部の議案を見て回ります。新しい意見がない議案はとばすので、むだな仕事をしません。運営スタッフが管理画面のボタンから、すぐに動かすこともできます。</p>
+  <p>できあがったトピックは、公開サイトの「トピック一覧」に表示され、トピックをえらぶとそこに入っている意見が読めます。</p>
+</section>
+
+<section class="chap" id="db">
+  <div class="chap-head"><span class="num">8</span><h2>データベースの中身</h2></div>
+  <p>データベースは、たくさんの「表」の集まりです。表どうしは「この行はあの表の○番とつながっている」という形で結ばれています（たとえば解説の行は、どの議案の解説かを覚えています）。</p>
+  <div class="tw"><table>
+    <thead><tr><th>表の名前</th><th>たとえると</th><th>中に入っているもの</th></tr></thead>
+    <tbody>
+      <tr><td class="m">bills</td><td>議案のカード</td><td>名前、いまの段階（準備中・提出・審議中・成立…）、公開状態</td></tr>
+      <tr><td class="m">bill_contents</td><td>カードの裏の説明文</td><td>「ふつう」「詳しく」それぞれの解説</td></tr>
+      <tr><td class="m">mirai_stances</td><td>チームみらいの通知表</td><td>賛成・反対など、理由、公開予定の日時</td></tr>
+      <tr><td class="m">diet_sessions</td><td>カレンダー</td><td>国会の会期の名前と期間</td></tr>
+      <tr><td class="m">interview_configs</td><td>インタビューの台本</td><td>モード、使う AI、目安の時間</td></tr>
+      <tr><td class="m">interview_messages</td><td>会話の録音</td><td>AI とあなたのやりとり1つ1つ</td></tr>
+      <tr><td class="m">interview_report</td><td>インタビューの記事</td><td>要約、立場、公開してよいか、不適切チェックの点数</td></tr>
+      <tr><td class="m">interview_opinion</td><td>意見のふせん</td><td>レポートから取り出した意見1件ずつ</td></tr>
+      <tr><td class="m">topic</td><td>ふせんを貼る模造紙の見出し</td><td>トピックの名前と説明（大きな見出しと小さな見出し）</td></tr>
+      <tr><td class="m">chat_usage_events</td><td>電気代の明細</td><td>AI を使った量と金額</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note"><b>かぎは全部サーバーに</b>どの表にも「ブラウザから直接は読めない」という鍵（RLS）をかけています。読み書きできるのはサーバーだけで、サーバーが「この人に見せてよいか」を確かめてから返します。</div>
+</section>
+
+<section class="chap" id="tools">
+  <div class="chap-head"><span class="num">9</span><h2>使っている道具</h2></div>
+  <p>プログラムは、世界中の人が作って公開している「道具（ライブラリ）」を組み合わせて作られています。</p>
+  <div class="tools">
+    <div class="card"><h3>画面づくり</h3><dl>
+      <dt>Next.js ・ React</dt><dd>Web アプリの骨組み。サーバーで画面を作ってから送れる</dd>
+      <dt>TypeScript</dt><dd>「ここには数字しか入らない」などの型をつけられる JavaScript</dd>
+      <dt>Tailwind CSS ・ Radix UI</dt><dd>見た目の調整と、ボタンやダイアログなどの部品</dd>
+      <dt>lucide-react</dt><dd>アイコン集</dd>
+    </dl></div>
+    <div class="card"><h3>データ</h3><dl>
+      <dt>Supabase</dt><dd>データベース（PostgreSQL）、ログイン、画像の置き場をまとめて提供</dd>
+      <dt>zod</dt><dd>送られてきたデータの形が正しいかチェック</dd>
+      <dt>react-hook-form</dt><dd>管理画面の入力フォーム</dd>
+    </dl></div>
+    <div class="card"><h3>AI</h3><dl>
+      <dt>Vercel AI SDK（ai）</dt><dd>AI の答えを少しずつ受けとる、決まった形で答えさせる</dd>
+      <dt>AI Gateway</dt><dd>OpenAI・Claude・Gemini などへの共通の窓口</dd>
+      <dt>Langfuse</dt><dd>AI に何を聞いて何が返ってきたかの記録</dd>
+      <dt>MCP</dt><dd>AI エージェントが管理画面の機能を道具として使うためのしくみ</dd>
+    </dl></div>
+    <div class="card"><h3>表示の工夫</h3><dl>
+      <dt>react-markdown ・ streamdown</dt><dd>解説や AI の答えの見出し・箇条書きを表示</dd>
+      <dt>@xyflow/react</dt><dd>トピックのマインドマップ（管理画面）</dd>
+      <dt>dnd-kit</dt><dd>インタビューの質問をドラッグで並べかえ</dd>
+    </dl></div>
+    <div class="card"><h3>動かす場所</h3><dl>
+      <dt>Vercel</dt><dd>公開サイトと管理画面のサーバー</dd>
+      <dt>Google Cloud Run ・ Cloud Scheduler</dt><dd>まとめロボットと、その目覚まし時計</dd>
+      <dt>GitHub Actions</dt><dd>テストや本番への反映を自動で実行</dd>
+    </dl></div>
+    <div class="card"><h3>品質</h3><dl>
+      <dt>Vitest</dt><dd>テスト（プログラムが正しく動くかの自動チェック）</dd>
+      <dt>Biome</dt><dd>書き方のルールと見た目の統一</dd>
+      <dt>Codecov ・ CodeRabbit</dt><dd>テストがどれだけ通っているかの記録と、AI によるコードレビュー</dd>
+    </dl></div>
+  </div>
+</section>
+
+<section class="chap" id="quality">
+  <div class="chap-head"><span class="num">10</span><h2>ミスや悪用を防ぐしくみ</h2></div>
+  <div class="tw"><table>
+    <thead><tr><th>しくみ</th><th>何を防ぐ？</th></tr></thead>
+    <tbody>
+      <tr><td>テスト（Vitest）</td><td>計算や変換のまちがい。データベースの関数は、本物のデータベースを手元で動かしてテストする</td></tr>
+      <tr><td>型チェック（TypeScript）</td><td>「数字のはずが文字が入っていた」などのまちがい</td></tr>
+      <tr><td>Biome</td><td>書き方のばらつき。コミットの前に自動で整える</td></tr>
+      <tr><td>GitHub Actions</td><td>プルリクエストのたびに上の3つとビルドを自動で実行。通らないと本番に入らない</td></tr>
+      <tr><td>AI の利用料の上限</td><td>使いすぎや、いたずらで大量に質問されること</td></tr>
+      <tr><td>モデレーション</td><td>悪口や個人情報が入ったレポートがそのまま公開されること</td></tr>
+      <tr><td>AI への入力の区切り</td><td>回答の中に「今までの指示を忘れて…」と書いて AI をだます攻撃（プロンプトインジェクション）</td></tr>
+      <tr><td>RLS と管理者チェック</td><td>ブラウザからデータベースを直接読まれること、スタッフ以外が管理画面に入ること</td></tr>
+      <tr><td>プレビュー用の合言葉（トークン）</td><td>まだ公開していない議案を、URL を知っているだけで見られてしまうこと</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="chap" id="words">
+  <div class="chap-head"><span class="num">11</span><h2>用語集</h2></div>
+  <dl class="words">
+    <dt>議案</dt><dd>国会で話し合うために出された、法律などの案</dd>
+    <dt>会期</dt><dd>国会が開かれている期間。「第○回国会」と呼ぶ</dd>
+    <dt>サーバー</dt><dd>インターネットの向こうで、たのまれた仕事をするコンピューター</dd>
+    <dt>データベース</dt><dd>データを表の形でしまっておく倉庫</dd>
+    <dt>API</dt><dd>プログラムどうしがデータをやりとりするための窓口</dd>
+    <dt>キャッシュ</dt><dd>よく使うデータの作りおき。速く表示できる</dd>
+    <dt>プロンプト</dt><dd>AI にわたす指示書</dd>
+    <dt>ストリーミング</dt><dd>答えを一度にではなく、少しずつ送ること</dd>
+    <dt>トークン</dt><dd>AI が文章を読むときの単位。AI の利用料はこれで決まる</dd>
+    <dt>モデレーション</dt><dd>不適切な内容がないかのチェック</dd>
+    <dt>匿名ユーザー</dt><dd>名前やメールアドレスなしで作られるアカウント</dd>
+    <dt>オープンソース</dt><dd>プログラムの中身を公開して、だれでも見たり改善を提案したりできるようにすること</dd>
+  </dl>
+</section>
+
+<footer>github.com/team-mirai/mirai-gikai ・ develop @ 99840c65（2026-10-06）時点のコードをもとに作成</footer>
+</div>
+</body>
+</html>'''
+
+
+if __name__ == "__main__":
+    open("how-it-works.html", "w").write(page())
+    print("ok")
